@@ -196,23 +196,34 @@ em { font-style: italic; }
 }
 .ticks.lg li { font-size: 16.5px; }
 
-/* --- reference ----------------------------------------------------------- */
-.testimonial { display: grid; grid-template-columns: 72px 1fr; gap: 24px; align-items: start; }
-.testimonial + .testimonial { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border); }
-@media (max-width: 640px) { .testimonial { grid-template-columns: 56px 1fr; gap: 16px; } }
-.avatar {
-  width: 72px; height: 72px; border-radius: 50%; overflow: hidden;
-  background: var(--accent-tint); border: 1px solid var(--border-2);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-wordmark); font-weight: 700; font-size: 15px;
-  color: var(--accent-l); position: relative;
+/* --- reference (komponenta z manuálu — shodná s jakubsevela.cz) ----------- */
+/* 4 reference → mřížka 2×2; při 6+ použít minmax(290px,1fr) jako na hubu (3 sloupce) */
+.ref-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); margin-top: 20px; }
+@media (max-width: 480px) { .ref-grid { grid-template-columns: 1fr; } }
+.quote-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 30px;
+  display: flex; flex-direction: column;
 }
-@media (max-width: 640px) { .avatar { width: 56px; height: 56px; font-size: 13px; } }
-.avatar::before { content: attr(data-initials); position: absolute; }
-.avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; position: relative; z-index: 1; }
-.quote { font-size: 15.5px; line-height: 1.7; color: var(--text-2); }
-.quote .author { display: block; margin-top: 12px; font-size: 14.5px; color: var(--text-2); font-style: normal; }
-.quote .author strong { color: var(--accent-l); font-weight: 700; }
+.quote-mark {
+  font-family: var(--font-display); font-size: 2.4rem; line-height: 0.6;
+  color: var(--accent); opacity: 0.55; margin-bottom: 14px;
+}
+.quote-card .body { color: var(--text-2); font-size: 0.98rem; line-height: 1.7; flex: 1; }
+.quote-card .who { display: flex; align-items: center; gap: 14px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+.avatar {
+  width: 46px; height: 46px; border-radius: 50%; flex: 0 0 46px; object-fit: cover; object-position: top;
+  border: 1px solid var(--border-2); background: var(--bg-alt);
+}
+.avatar-initials {
+  width: 46px; height: 46px; border-radius: 50%; flex: 0 0 46px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-l);
+  background: var(--accent-tint); border: 1px solid var(--accent-border);
+}
+.quote-card .name { font-family: var(--font-body); font-weight: 500; font-size: 0.95rem; color: var(--text); }
+.quote-card .role { font-size: 0.83rem; color: var(--text-3); line-height: 1.45; }
+@media (max-width: 640px) { .quote-card { padding: 24px 22px; } }
 
 .hero-image img { width: 100%; height: auto; display: block; border-radius: var(--radius-card); }
 
@@ -562,23 +573,56 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
     <h3 class="section-title">Ověřeno zákazníky</h3>
     <p class="note"><em>Firmy, které <span class="accent">Feedco</span> denně využívají, se podělily o své zkušenosti.</em></p>
 
-    <div style="margin-top:20px">
-      <div class="testimonial">
-        <div class="avatar" data-initials="PA"><img src="/images/image05.jpg" alt="Petr Altman" onerror="this.remove()"></div>
-        <p class="quote"><em>Řešení přímého importu dat dodavatelů do Heliosu prostřednictvím služby Feedco nám ušetřilo hodně času při realizaci obchodních případů. Máme tak více času na zákazníky a můžeme se věnovat důležitějším úkolům než dohledávání zboží v datech nebo webech dodavatelů. Na řešení také oceňujeme, že jej lze napojit na jakýkoliv formát.</em><span class="author"><strong>Petr Altman, MBA</strong>, Jednatel, VERKON, s.r.o.</span></p>
-      </div>
-      <div class="testimonial">
-        <div class="avatar" data-initials="KB"><img src="/images/image04.jpg" alt="Karel Bartůněk" onerror="this.remove()"></div>
-        <p class="quote"><em>Automatizace vydaných objednávek nám výrazně zefektivnila práci. Manipulace s objednávkami, která dříve zabrala až 4 hodiny týdně, dnes trvá jen asi půl hodiny. To je obrovská úspora času – dnes si už práci s objednávkami bez Feedca ani neumíme představit.</em><span class="author"><strong>Ing. Karel Bartůněk</strong>, Stock Manager, Younger Optics Europe, s.r.o.</span></p>
-      </div>
-      <div class="testimonial">
-        <div class="avatar" data-initials="JK"><img src="/images/image03.jpg" alt="Josef Kolník" onerror="this.remove()"></div>
-        <p class="quote"><em>Automatizace objednávek až po následné generování faktur včetně odeslání zákazníkům nám šetří čas a tím pádem i peníze. Celková komunikace s&nbsp;programátory Feedca je rychlá a vše bylo vyřízeno k naší spokojenosti.</em><span class="author"><strong>Ing. Josef Kolník</strong>, Sales Manager, MIRA MAR, s.r.o.</span></p>
-      </div>
-      <div class="testimonial">
-        <div class="avatar" data-initials="PP"><img src="/images/image02.jpg" alt="Petr Putík" onerror="this.remove()"></div>
-        <p class="quote"><em>Díky vytvořenému konektoru mezi naším E-shopem a firemním ERP systémem jsme schopni daleko rychleji zpracovávat zákaznické objednávky a eliminovat jak časovou náročnost administrativních úkonů, tak eliminovat možné lidské chyby v této agendě. Řešením konektoru na míru pomocí customizací jsme si jej navrhnuli přímo dle našich potřeb, aby byl v souladu se stávajícími vnitropodnikovými procesy.</em><span class="author"><strong>Ing. Petr Putík</strong>, Senior Manager, ZLKL, s.r.o.</span></p>
-      </div>
+    <div class="ref-grid">
+
+      <figure class="quote-card">
+        <div class="quote-mark">&ldquo;</div>
+        <div class="body">Řešení přímého importu dat dodavatelů do Heliosu prostřednictvím služby Feedco nám ušetřilo hodně času při realizaci obchodních případů. Máme tak více času na zákazníky a můžeme se věnovat důležitějším úkolům než dohledávání zboží v datech nebo webech dodavatelů. Na řešení také oceňujeme, že jej lze napojit na jakýkoliv formát.</div>
+        <figcaption class="who">
+          <img class="avatar" src="/images/image05.jpg" alt="Petr Altman, MBA" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'avatar-initials',textContent:'PA'}))">
+          <div>
+            <div class="name">Petr Altman, MBA</div>
+            <div class="role">Jednatel, VERKON, s.r.o.</div>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="quote-card">
+        <div class="quote-mark">&ldquo;</div>
+        <div class="body">Automatizace vydaných objednávek nám výrazně zefektivnila práci. Manipulace s objednávkami, která dříve zabrala až 4 hodiny týdně, dnes trvá jen asi půl hodiny. To je obrovská úspora času – dnes si už práci s objednávkami bez Feedca ani neumíme představit.</div>
+        <figcaption class="who">
+          <img class="avatar" src="/images/image04.jpg" alt="Karel Bartůněk" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'avatar-initials',textContent:'KB'}))">
+          <div>
+            <div class="name">Ing. Karel Bartůněk</div>
+            <div class="role">Stock Manager, Younger Optics Europe, s.r.o.</div>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="quote-card">
+        <div class="quote-mark">&ldquo;</div>
+        <div class="body">Automatizace objednávek až po následné generování faktur včetně odeslání zákazníkům nám šetří čas a tím pádem i peníze. Celková komunikace s&nbsp;programátory Feedca je rychlá a vše bylo vyřízeno k naší spokojenosti.</div>
+        <figcaption class="who">
+          <img class="avatar" src="/images/image03.jpg" alt="Josef Kolník" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'avatar-initials',textContent:'JK'}))">
+          <div>
+            <div class="name">Ing. Josef Kolník</div>
+            <div class="role">Sales Manager, MIRA MAR, s.r.o.</div>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="quote-card">
+        <div class="quote-mark">&ldquo;</div>
+        <div class="body">Díky vytvořenému konektoru mezi naším E-shopem a firemním ERP systémem jsme schopni daleko rychleji zpracovávat zákaznické objednávky a eliminovat jak časovou náročnost administrativních úkonů, tak eliminovat možné lidské chyby v této agendě. Řešením konektoru na míru pomocí customizací jsme si jej navrhnuli přímo dle našich potřeb, aby byl v souladu se stávajícími vnitropodnikovými procesy.</div>
+        <figcaption class="who">
+          <img class="avatar" src="/images/image02.jpg" alt="Petr Putík" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'avatar-initials',textContent:'PP'}))">
+          <div>
+            <div class="name">Ing. Petr Putík</div>
+            <div class="role">Senior Manager, ZLKL, s.r.o.</div>
+          </div>
+        </figcaption>
+      </figure>
+
     </div>
   </div>
 </section>
