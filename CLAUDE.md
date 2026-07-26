@@ -42,6 +42,14 @@ kontaktní blok (e-mail na dané doméně, +420 774 267 301, LinkedIn) a právn�
 (Mgr. Jakub Ševela, Lidická 700/19, 602 00 Brno, IČ, DIČ) jsou stejné.
 Když patičku měníš, propiš to do `jakubsevela-web` a `ethel-web`.
 
+**Wordmark patří do vlastního pásu nad sloupci, ne do prvního sloupce.** Když stál jako
+první prvek jednoho sloupce, jeho velikost a `line-height` rozhodily horní hranu proti
+ostatním sloupcům a patička vypadala rozsypaně. Všechny tři sloupce pod ním začínají
+textem **stejné velikosti a line-heightu** (15 px / 1.5) — tagline i první odkaz v obou
+seznamech. Když sem přidáváš sloupec, drž tuhle metriku, jinak se to rozjede znovu.
+Mono label nad sloupcem byl další takový rozdíl a proto zmizel; e-mail a telefon
+nadpis „Kontakt" nepotřebují.
+
 **Prolinky nemají zastřešující nadpis.** Osobní web a produktový web nepatří pod jednu
 hlavičku, protože k Feedcu mají různý vztah — proto každý odkaz nese vlastní jednořádkový
 popis, co to je. Zkoušeli jsme „Další weby" (mdlé) i „Od stejného autora" (spojuje
