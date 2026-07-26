@@ -216,9 +216,21 @@ em { font-style: italic; }
 
 .hero-image img { width: 100%; height: auto; display: block; border-radius: var(--radius-card); }
 
-/* --- formulář ------------------------------------------------------------ */
-.contact-form { max-width: 520px; }
-.contact-form > * + * { margin-top: 12px; }
+/* --- formulář (komponenta z manuálu v1.3, sekce Formulář) ---------------- */
+.contact-form { max-width: 560px; }
+.contact-form .field + .field { margin-top: 18px; }
+
+/* label: DM Mono uppercase — stejná role jako labely v kartách tarifů */
+.contact-form label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-2);
+  margin-bottom: 7px;
+}
+.contact-form label .opt { color: var(--text-3); text-transform: none; letter-spacing: 0.04em; }
+
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form input[type="tel"],
@@ -226,23 +238,68 @@ em { font-style: italic; }
   width: 100%; display: block;
   font-family: var(--font-body); font-size: 15.5px; line-height: 1.6;
   color: var(--text); background: var(--bg-alt);
-  border: 1px solid var(--border); border-radius: var(--radius-btn);
+  border: 1px solid var(--border-2); border-radius: var(--radius-btn);
   padding: 12px 14px; outline: 0;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
-.contact-form textarea { height: 150px; resize: vertical; }
-.contact-form :focus-visible { border-color: var(--accent-border-hover); }
+.contact-form textarea { min-height: 160px; resize: vertical; }
 .contact-form ::placeholder { color: var(--text-3); }
-.contact-form input[name="mail"] { display: none; }
-.contact-form button {
-  font-family: var(--font-body); font-weight: 500; font-size: 14.5px;
-  padding: 11px 22px; border-radius: var(--radius-btn); cursor: pointer;
+.contact-form input:hover, .contact-form textarea:hover { border-color: rgba(255,255,255,0.22); }
+.contact-form input:focus-visible, .contact-form textarea:focus-visible {
+  border-color: var(--accent-border-hover);
+  box-shadow: 0 0 0 3px var(--accent-tint);
+}
+
+/* honeypot — mimo viewport, ne display:none (to některé boty přeskočí) */
+.contact-form .hp { position: absolute; left: -9999px; }
+
+.contact-form .submit-row { margin-top: 26px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.contact-form button[type="submit"] {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-body); font-weight: 500; font-size: 15px;
+  padding: 13px 26px; border-radius: var(--radius-btn); cursor: pointer;
   background: var(--accent-tint);
   border: 1px solid var(--accent-border);
   color: var(--accent-l);
   transition: background 0.15s, border-color 0.15s;
 }
-.contact-form button:hover { background: var(--accent-tint-hover); border-color: var(--accent-border-hover); }
+.contact-form button[type="submit"]:hover { background: var(--accent-tint-hover); border-color: var(--accent-border-hover); }
+.contact-form button[type="submit"] svg { width: 0.9em; height: 0.9em; fill: currentColor; flex: 0 0 auto; }
+.contact-form .privacy-note { font-size: 13.5px; color: var(--text-3); }
+
+/* --- stavový banner po odeslání (úspěch / chyba / limit) ------------------ */
+.form-status {
+  display: none; gap: 16px; align-items: flex-start;
+  max-width: 560px;
+  background: var(--card);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-card);
+  padding: 22px 24px;
+  margin-top: 20px;
+}
+.form-status.is-visible { display: flex; }
+.form-status .fs-icon {
+  flex: 0 0 auto;
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--accent-tint);
+  color: var(--accent-l);
+}
+.form-status .fs-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.form-status h4 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-heading);
+  font-size: 18px; line-height: 1.35;
+  margin-bottom: 2px;
+}
+.form-status p { font-size: 15px; line-height: 1.6; color: var(--text-2); }
+.form-status p a { color: var(--accent-l); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.form-status p a:hover { text-decoration-thickness: 2px; }
+.form-status.is-error { border-color: var(--danger-border); }
+.form-status.is-error .fs-icon { background: var(--danger-tint); color: var(--danger-l); }
+.form-status.is-limit { border-color: var(--neutral-border); }
+.form-status.is-limit .fs-icon { background: var(--neutral-tint); color: var(--neutral-l); }
 
 /* --- patička ------------------------------------------------------------- */
 /* --- sdílená patička -----------------------------------------------------
@@ -532,15 +589,56 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
     <h3 class="section-title">Máte zájem? Napište nám...</h3>
     <p class="note"><em>Do zprávy prosím uveďte, o jaký balíček máte zájem nebo jestli si přejete <span class="accent">nabídku na míru</span>.</em></p>
 
-    <div id="kontakt-status" style="display:none;margin-top:20px;padding:16px 20px;border-radius:12px;background:var(--card);border:1px solid var(--accent-border)"></div>
+    <div class="form-status" id="status-ok" role="status">
+      <div class="fs-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 6.5"/></svg></div>
+      <div>
+        <h4>Díky za zprávu</h4>
+        <p>Ozveme se do dvou pracovních dnů. Potvrzení jsme poslali i na váš e-mail.</p>
+      </div>
+    </div>
+    <div class="form-status is-error" id="status-err" role="alert">
+      <div class="fs-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+      <div>
+        <h4>Zprávu se nepodařilo odeslat</h4>
+        <p>Zkuste to prosím znovu, nebo napište rovnou na <a href="mailto:kontakt@feedco.cz">kontakt@feedco.cz</a>.</p>
+      </div>
+    </div>
+    <div class="form-status is-limit" id="status-limit" role="status">
+      <div class="fs-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+      <div>
+        <h4>Zpráv bylo za poslední chvíli víc</h4>
+        <p>Zkuste to prosím za pár minut, nebo napište rovnou na <a href="mailto:kontakt@feedco.cz">kontakt@feedco.cz</a>.</p>
+      </div>
+    </div>
 
     <form class="contact-form" id="kontakt-form" action="https://gygwfcattcunbikootbx.supabase.co/functions/v1/web-lead" method="POST" style="margin-top:20px">
-      <div><input type="text" name="name" placeholder="Jméno / Název firmy" maxlength="128" required></div>
-      <div><input type="email" name="email" placeholder="E-mail" maxlength="128" required></div>
-      <div><input type="tel" name="phone" placeholder="Telefonní číslo (nepovinné)" pattern="[0-9\-\(\)+ #*]+" minlength="7" maxlength="28"></div>
-      <div><input type="text" name="mail" placeholder="Mail" maxlength="128" tabindex="-1" autocomplete="off"></div>
-      <div><textarea name="message" placeholder="Zpráva" maxlength="16384" required></textarea></div>
-      <div><button type="submit">Odeslat</button></div>
+      <div class="field">
+        <label for="kf-name">Jméno / název firmy</label>
+        <input type="text" id="kf-name" name="name" maxlength="128" placeholder="Jan Novák, Firma s.r.o." required>
+      </div>
+      <div class="field">
+        <label for="kf-email">E-mail</label>
+        <input type="email" id="kf-email" name="email" maxlength="128" placeholder="jan@firma.cz" required>
+      </div>
+      <div class="field">
+        <label for="kf-phone">Telefon <span class="opt">— nepovinné</span></label>
+        <input type="tel" id="kf-phone" name="phone" pattern="[0-9\-\(\)+ #*]+" minlength="7" maxlength="28" placeholder="+420 ...">
+      </div>
+      <div class="field hp" aria-hidden="true">
+        <label for="kf-mail">Mail</label>
+        <input type="text" id="kf-mail" name="mail" maxlength="128" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="kf-message">Zpráva</label>
+        <textarea id="kf-message" name="message" maxlength="16384" placeholder="S čím potřebujete pomoct?" required></textarea>
+      </div>
+      <div class="submit-row">
+        <button type="submit">
+          Odeslat zprávu
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.7 8.8 13 8.8 8.9 12.9 10 14l6-6-6-6-1.1 1.1L13 7.2 1.7 7.2z"/></svg>
+        </button>
+        <p class="privacy-note">Odpovídáme do dvou pracovních dnů.</p>
+      </div>
     </form>
 
     <h3 class="section-title" style="margin-top:48px">Chcete probrat raději telefonicky?</h3>
@@ -600,19 +698,19 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
 <script>
   (function () {
     var params = new URLSearchParams(window.location.search);
-    var status = document.getElementById('kontakt-status');
     var form = document.getElementById('kontakt-form');
-    if (!status || !form) return;
+    if (!form) return;
+
+    function show(id) {
+      var el = document.getElementById(id);
+      if (el) el.classList.add('is-visible');
+    }
 
     if (params.has('odeslano')) {
-      status.textContent = 'Díky za zprávu. Ozveme se do pár pracovních dnů.';
-      status.style.display = 'block';
+      show('status-ok');
       form.style.display = 'none';
     } else if (params.has('chyba')) {
-      status.textContent = params.get('chyba') === 'limit'
-        ? 'Zpráv jste za poslední chvíli poslali víc — zkuste to prosím za chvíli znovu.'
-        : 'Zprávu se nepodařilo odeslat. Zkuste to prosím znovu nebo napište na kontakt@feedco.cz.';
-      status.style.display = 'block';
+      show(params.get('chyba') === 'limit' ? 'status-limit' : 'status-err');
     }
 
     if (params.has('odeslano') || params.has('chyba')) {
