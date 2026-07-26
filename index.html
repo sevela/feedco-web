@@ -139,7 +139,7 @@ em { font-style: italic; }
 
 /* --- mřížky -------------------------------------------------------------- */
 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
-.cols.hero { grid-template-columns: 1.35fr 1fr; gap: 48px; align-items: center; }
+.cols.hero { grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: center; }
 @media (max-width: 820px) { .cols, .cols.hero { grid-template-columns: 1fr; gap: 40px; } }
 
 /* --- hero: jednotná stavba podle manuálu v1.6 (vzor jakubsevela.cz) -------
@@ -168,12 +168,12 @@ em { font-style: italic; }
   background: var(--accent-tint);
   border-radius: var(--radius-btn);
 }
-/* max 3.5rem (ne 3.8 z manuálu): druhý řádek „se světem e-commerce" se musí
-   vejít do textového sloupce vcelku — při 3.8rem se lámal uvnitř „e-commerce" */
-#home .lede { font-size: clamp(2.3rem, 4.8vw, 3.5rem); line-height: 1.2; max-width: 21ch; }
-#home .lede .nowrap { white-space: nowrap; }
-#home .body-text { font-size: 1.05rem; max-width: 52ch; }
-#home .btn-row { margin-top: 8px; }
+/* vertikální rytmus přesně podle hubu: 1.6rem / 1.5rem / 2.3rem
+   (obecný .stack by dal uniformních 20 px a hero by se rozešlo s hubem) */
+#home .lede { font-size: clamp(2.3rem, 4.8vw, 3.8rem); line-height: 1.2; max-width: 21ch; margin-top: 1.6rem; }
+#home .lede .nowrap { white-space: nowrap; } /* „e-commerce" se nesmí zlomit na spojovníku */
+#home .body-text { font-size: 1.05rem; max-width: 52ch; margin-top: 1.5rem; }
+#home .btn-row { margin-top: 2.3rem; }
 @media (max-width: 820px) {
   #home { min-height: 0; padding: 72px 0 64px; }
 }
