@@ -258,24 +258,32 @@ em { font-style: italic; }
 
 @media (prefers-reduced-motion: no-preference) {
   .hero-art .packet { animation: art-run 4.2s cubic-bezier(0.42, 0, 0.58, 1) infinite; offset-rotate: 0deg; }
-  .hero-art .back { animation-direction: reverse; }
-  /* rozfázováno, ať se na jednom drátu dvě tečky nepotkají uprostřed */
-  .hero-art .d2 { animation-delay: -0.6s; }
-  .hero-art .d3 { animation-delay: -1.2s; }
-  .hero-art .d4 { animation-delay: -1.8s; }
-  .hero-art .d5 { animation-delay: -2.4s; }
-  .hero-art .d6 { animation-delay: -3.0s; }
-  .hero-art .d7 { animation-delay: -3.6s; }
+  /* Dvojice na jednom spoji se musí minout u kraje, ne uprostřed. Protijedoucí
+     pakety se potkají jednou za cyklus vždycky; posun o 0,9 cyklu (3,78 s) položí
+     to setkání na 5 % dráhy, kde jeden teprve naskakuje a druhý dohasíná.
+     Napříč spoji jsou fáze rozprostřené, ať se to nepohybuje jako hejno. */
+  .hero-art .w1 { animation-delay:  0s;     }   /* e-shop → Feedco */
+  .hero-art .w2 { animation-delay: -3.78s;  }   /* Feedco → e-shop */
+  .hero-art .w3 { animation-delay: -2.1s;   }   /* feed → Feedco (jednosměrný) */
+  .hero-art .w4 { animation-delay: -1.4s;   }   /* API → Feedco */
+  .hero-art .w5 { animation-delay: -0.98s;  }   /* Feedco → API */
+  .hero-art .w6 { animation-delay: -2.8s;   }   /* Feedco → Helios */
+  .hero-art .w7 { animation-delay: -2.38s;  }   /* Helios → Feedco */
   .hero-art .ring { animation: art-spin 80s linear infinite; transform-origin: 260px 260px; }
   .hero-art .glow { animation: art-breathe 6.5s ease-in-out infinite; transform-origin: 260px 260px; }
 }
 /* Dráty jsou obousměrné: e-shop, API i Helios si s Feedcem vyměňují data
-   oběma směry. Jediná výjimka je feed od dodavatele — ten se jen čte,
-   Feedco do něj nic nezapisuje, takže tam letí paket jen dolů. */
-.hero-art .q1 { offset-path: path('M 84 116 C 84 186, 168 178, 205 208'); }
-.hero-art .q2 { offset-path: path('M 260 116 L 260 180'); }
-.hero-art .q3 { offset-path: path('M 436 116 C 436 186, 352 178, 315 208'); }
-.hero-art .q4 { offset-path: path('M 260 340 L 260 400'); }
+   oběma směry. Každý směr má vlastní linku — dva pakety na jedné se cestou
+   srážely. Vnitřní linka vede dovnitř, vnější ven. Jediná výjimka je feed
+   od dodavatele: ten se jen čte, Feedco do něj nic nezapisuje, takže má
+   linku jednu. */
+.hero-art .w1 { offset-path: path('M 89 116 C 89 133.5, 93 142.81, 101.45 152.38 C 109.9 161.94, 119.71 167.12, 132.52 172.37 C 145.33 177.62, 159.05 181.53, 172.13 186.09 C 185.21 190.65, 198.9 196.62, 208.15 204.12'); }
+.hero-art .w2 { offset-path: path('M 79 116 C 79 133.5, 85.5 149.44, 93.96 159 C 102.41 168.56, 115.92 176.38, 128.73 181.63 C 141.54 186.88, 155.76 190.97, 168.84 195.53 C 181.92 200.1, 192.6 204.38, 201.85 211.88'); animation-direction: reverse; }
+.hero-art .w3 { offset-path: path('M 260 116 L 260 180'); }
+.hero-art .w4 { offset-path: path('M 431 116 C 431 133.5, 427 142.81, 418.55 152.38 C 410.1 161.94, 400.29 167.12, 387.48 172.37 C 374.67 177.62, 360.95 181.53, 347.87 186.09 C 334.79 190.65, 321.1 196.62, 311.85 204.12'); }
+.hero-art .w5 { offset-path: path('M 441 116 C 441 133.5, 434.5 149.44, 426.04 159 C 417.59 168.56, 404.08 176.38, 391.27 181.63 C 378.46 186.88, 364.24 190.97, 351.16 195.53 C 338.08 200.1, 327.4 204.38, 318.15 211.88'); animation-direction: reverse; }
+.hero-art .w6 { offset-path: path('M 265 340 L 265 400'); }
+.hero-art .w7 { offset-path: path('M 255 340 L 255 400'); animation-direction: reverse; }
 
 @keyframes art-run     { 0% { offset-distance: 0%; opacity: 0; } 14% { opacity: 1; } 86% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
 @keyframes art-spin    { to { transform: rotate(360deg); } }
@@ -465,14 +473,19 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
          <g><rect class="nodebox" x="372" y="38" width="128" height="78" rx="14"/>
             <g class="i-code2" transform="translate(422.5000008046627,54.5) scale(1.125)"><path class="ico" d="M8.6 4.6 3.2 12l5.4 7.4"/><path class="ico" d="M15.4 4.6 20.8 12l-5.4 7.4"/><path class="ico" d="M13.6 3 10.4 21"/></g><text class="nname" x="436" y="100" text-anchor="middle">API</text></g>
 
-         <path class="wire" d="M 84 116 C 84 186, 168 178, 205 208"/>
+         <!-- obousměrné spoje mají dvě samostatné linky, jednu na každý směr -->
+         <path class="wire" d="M 89 116 C 89 133.5, 93 142.81, 101.45 152.38 C 109.9 161.94, 119.71 167.12, 132.52 172.37 C 145.33 177.62, 159.05 181.53, 172.13 186.09 C 185.21 190.65, 198.9 196.62, 208.15 204.12"/>
+         <path class="wire" d="M 79 116 C 79 133.5, 85.5 149.44, 93.96 159 C 102.41 168.56, 115.92 176.38, 128.73 181.63 C 141.54 186.88, 155.76 190.97, 168.84 195.53 C 181.92 200.1, 192.6 204.38, 201.85 211.88"/>
          <path class="wire" d="M 260 116 L 260 180"/>
-         <path class="wire" d="M 436 116 C 436 186, 352 178, 315 208"/>
-         <path class="wire" d="M 260 340 L 260 400"/>
-         <circle class="packet q1" r="3"/><circle class="packet q1 back d4" r="3"/>
-         <circle class="packet q2 d2" r="3"/>
-         <circle class="packet q3 d3" r="3"/><circle class="packet q3 back d6" r="3"/>
-         <circle class="packet q4 d5" r="3"/><circle class="packet q4 back d7" r="3"/>
+         <path class="wire" d="M 431 116 C 431 133.5, 427 142.81, 418.55 152.38 C 410.1 161.94, 400.29 167.12, 387.48 172.37 C 374.67 177.62, 360.95 181.53, 347.87 186.09 C 334.79 190.65, 321.1 196.62, 311.85 204.12"/>
+         <path class="wire" d="M 441 116 C 441 133.5, 434.5 149.44, 426.04 159 C 417.59 168.56, 404.08 176.38, 391.27 181.63 C 378.46 186.88, 364.24 190.97, 351.16 195.53 C 338.08 200.1, 327.4 204.38, 318.15 211.88"/>
+         <path class="wire" d="M 265 340 L 265 400"/>
+         <path class="wire" d="M 255 340 L 255 400"/>
+
+         <circle class="packet w1" r="3"/><circle class="packet w2" r="3"/>
+         <circle class="packet w3" r="3"/>
+         <circle class="packet w4" r="3"/><circle class="packet w5" r="3"/>
+         <circle class="packet w6" r="3"/><circle class="packet w7" r="3"/>
 
          <circle class="glow" cx="260" cy="260" r="148"/>
          <circle class="ring2" cx="260" cy="260" r="116"/>
