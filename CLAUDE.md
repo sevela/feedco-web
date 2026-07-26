@@ -48,6 +48,11 @@ popis, co to je. Zkoušeli jsme „Další weby" (mdlé) i „Od stejného autor
 nespojitelné) a obojí zahodili. Odkazy odděluje vlasová linka vlevo, která na hover
 zezelená.
 
+Ikony v patičce (LinkedIn) jsou **monochromatické** — `fill: currentColor`, takže dědí
+barvu textu i hover. Značkové barvy třetích stran do palety nepatří.
+
+Odkaz na `docs.feedco.cz` byl v patičce zkoušený a zahozený.
+
 **Newsletter v patičce zatím není.** Podle roadmapy nemá platformu ani frekvenci a hub
 kvůli tomu záměrně nemá signup. Odkaz na neexistující odběr je horší než žádný. Až
 newsletter vznikne, přidat sem i na ostatní dva weby.
