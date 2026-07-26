@@ -34,6 +34,19 @@ Nikdy nepiš hexy natvrdo — `index.html` už je na tokenech postavený.
 - **Radius:** tlačítka 8 px, karty 12 px.
 - **Kontrast:** text na tónované ploše vždy v `--accent-l`. `--text-2` nepoužívat pod 14 px.
 
+### Sdílená patička
+
+Blok `<footer>` je označený komentářem a má být **shodný na všech třech webech**. Mění se
+jen wordmark, věta pod ním, prolinky na zbylé dva weby a disclaimer. Struktura, CSS
+a právní blok (Mgr. Jakub Ševela, Lidická 700/19, 602 00 Brno, IČ, DIČ) jsou stejné.
+Když patičku měníš, propiš to do `jakubsevela-web` a `ethel-web`.
+
+### Wordmark v hlavičce
+
+Wordmark je **jen v hlavičce**, ne v heru — H1 je propozice stránky, ne logo.
+Pozor na specificitu: `.topnav ul a` (ne `.topnav a`), jinak mono a uppercase styl
+navigačních odkazů přebije wordmark a ten se vykreslí velkými písmeny v DM Mono.
+
 ### Když měníš tokeny
 
 `brand/tokens.css` je shodný ve všech třech repech (`jakubsevela-web`, `feedco-web`,
