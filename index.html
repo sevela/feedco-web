@@ -253,14 +253,21 @@ em { font-style: italic; }
 .hero-art .is-target .nname   { fill: var(--accent-l); }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero-art .packet { animation: art-run 3.6s cubic-bezier(0.42, 0, 0.58, 1) infinite; offset-rotate: 0deg; }
-  .hero-art .p2 { animation-delay: -0.9s; }
-  .hero-art .p3 { animation-delay: -1.8s; }
-  .hero-art .p4 { animation-delay: -2.7s; }
+  .hero-art .packet { animation: art-run 4.2s cubic-bezier(0.42, 0, 0.58, 1) infinite; offset-rotate: 0deg; }
+  .hero-art .back { animation-direction: reverse; }
+  /* rozfázováno, ať se na jednom drátu dvě tečky nepotkají uprostřed */
+  .hero-art .d2 { animation-delay: -0.6s; }
+  .hero-art .d3 { animation-delay: -1.2s; }
+  .hero-art .d4 { animation-delay: -1.8s; }
+  .hero-art .d5 { animation-delay: -2.4s; }
+  .hero-art .d6 { animation-delay: -3.0s; }
+  .hero-art .d7 { animation-delay: -3.6s; }
   .hero-art .ring { animation: art-spin 80s linear infinite; transform-origin: 260px 260px; }
   .hero-art .glow { animation: art-breathe 6.5s ease-in-out infinite; transform-origin: 260px 260px; }
 }
-/* tři zdroje tečou do Feedca, Feedco pak dolů do Heliosu */
+/* Dráty jsou obousměrné: e-shop, API i Helios si s Feedcem vyměňují data
+   oběma směry. Jediná výjimka je feed od dodavatele — ten se jen čte,
+   Feedco do něj nic nezapisuje, takže tam letí paket jen dolů. */
 .hero-art .q1 { offset-path: path('M 84 116 C 84 186, 168 178, 205 208'); }
 .hero-art .q2 { offset-path: path('M 260 116 L 260 180'); }
 .hero-art .q3 { offset-path: path('M 436 116 C 436 186, 352 178, 315 208'); }
@@ -435,7 +442,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
         </ul>
       </div>
       <div>
-        <svg class="hero-art" viewBox="0 0 520 520" role="img" aria-label="Feedco sbírá data z e-shopů, dodavatelských feedů a API a předává je do Heliosu Inuvio">
+        <svg class="hero-art" viewBox="0 0 520 520" role="img" aria-label="Feedco obousměrně propojuje Helios Inuvio s e-shopy a API; feedy dodavatelů se do něj jen načítají">
          <defs>
           <radialGradient id="coreG" cx="50%" cy="34%" r="76%">
            <stop offset="0%" stop-color="#1c2018"/><stop offset="62%" stop-color="#15161a"/><stop offset="100%" stop-color="#111114"/>
@@ -458,8 +465,10 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
          <path class="wire" d="M 260 116 L 260 180"/>
          <path class="wire" d="M 436 116 C 436 186, 352 178, 315 208"/>
          <path class="wire" d="M 260 340 L 260 400"/>
-         <circle class="packet q1 p1" r="3"/><circle class="packet q2 p2" r="3"/>
-         <circle class="packet q3 p3" r="3"/><circle class="packet q4 p4" r="3"/>
+         <circle class="packet q1" r="3"/><circle class="packet q1 back d4" r="3"/>
+         <circle class="packet q2 d2" r="3"/>
+         <circle class="packet q3 d3" r="3"/><circle class="packet q3 back d6" r="3"/>
+         <circle class="packet q4 d5" r="3"/><circle class="packet q4 back d7" r="3"/>
 
          <circle class="glow" cx="260" cy="260" r="148"/>
          <circle class="ring2" cx="260" cy="260" r="116"/>
