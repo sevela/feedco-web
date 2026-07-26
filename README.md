@@ -1,6 +1,6 @@
 # feedco.cz
 
-Modulární e-commerce konektor pro Helios iNuvio. Samostatný web (spoke) v architektuře
+Modulární e-commerce konektor pro Helios Inuvio. Samostatný web (spoke) v architektuře
 hub-and-spoke; hub je [jakubsevela.cz](https://jakubsevela.cz).
 
 Statický web bez buildu. Nasazuje GitHub Pages z branch `main`, root.

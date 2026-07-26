@@ -2,7 +2,7 @@
 
 Statický web, žádný build. Hostuje GitHub Pages z branch `main`, root. Doména je v `CNAME`.
 
-Feedco = modulární e-commerce konektor pro Helios iNuvio. Samostatný web (spoke),
+Feedco = modulární e-commerce konektor pro Helios Inuvio. Samostatný web (spoke),
 prolinkovaný s [jakubsevela.cz](https://jakubsevela.cz), nikoli pod ním.
 
 ## Stav
