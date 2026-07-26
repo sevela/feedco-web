@@ -532,8 +532,9 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
     <h3 class="section-title">Máte zájem? Napište nám...</h3>
     <p class="note"><em>Do zprávy prosím uveďte, o jaký balíček máte zájem nebo jestli si přejete <span class="accent">nabídku na míru</span>.</em></p>
 
-    <form class="contact-form" action="https://formspree.io/f/xkgnqpnz" method="POST" style="margin-top:20px">
-      <input type="hidden" name="_subject" value="Feedco — poptávka z webu">
+    <div id="kontakt-status" style="display:none;margin-top:20px;padding:16px 20px;border-radius:12px;background:var(--card);border:1px solid rgba(223,166,62,.35)"></div>
+
+    <form class="contact-form" id="kontakt-form" action="https://gygwfcattcunbikootbx.supabase.co/functions/v1/web-lead" method="POST" style="margin-top:20px">
       <div><input type="text" name="name" placeholder="Jméno / Název firmy" maxlength="128" required></div>
       <div><input type="email" name="email" placeholder="E-mail" maxlength="128" required></div>
       <div><input type="tel" name="phone" placeholder="Telefonní číslo (nepovinné)" pattern="[0-9\-\(\)+ #*]+" minlength="7" maxlength="28"></div>
@@ -594,6 +595,33 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-ZK1160VT0P');
+</script>
+
+<script>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var status = document.getElementById('kontakt-status');
+    var form = document.getElementById('kontakt-form');
+    if (!status || !form) return;
+
+    if (params.has('odeslano')) {
+      status.textContent = 'Díky za zprávu. Ozveme se do pár pracovních dnů.';
+      status.style.display = 'block';
+      form.style.display = 'none';
+    } else if (params.has('chyba')) {
+      status.textContent = params.get('chyba') === 'limit'
+        ? 'Zpráv jste za poslední chvíli poslali víc — zkuste to prosím za chvíli znovu.'
+        : 'Zprávu se nepodařilo odeslat. Zkuste to prosím znovu nebo napište na kontakt@feedco.cz.';
+      status.style.display = 'block';
+    }
+
+    if (params.has('odeslano') || params.has('chyba')) {
+      params.delete('odeslano');
+      params.delete('chyba');
+      var newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '') + window.location.hash;
+      window.history.replaceState({}, '', newUrl);
+    }
+  })();
 </script>
 
 </body>
