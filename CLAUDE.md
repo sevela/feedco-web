@@ -106,7 +106,7 @@ Disclaimer „není produktem Asseco Solutions" na produktovém webu zůstává.
 
 - Nepřidávat build krok ani závislosti, dokud to nepůjde jinak.
 - Nepřidávat PHP ani nic serverového — Pages umí jen statické soubory.
-  Formuláře jdou přes Formspree.
+  Formulář jde přes Supabase edge funkci (viz níže), ne přes vlastní backend.
 - Neměnit `CNAME`, nemazat `.nojekyll`.
 - Nepoužívat `localStorage`/`sessionStorage`.
 
@@ -122,11 +122,19 @@ Disclaimer „není produktem Asseco Solutions" na produktovém webu zůstává.
   pilulková tlačítka s 3px borderem.
 - Navigace je teď sticky (v Carrdu nebyla) — stejně jako na hubu.
 - Texty čekají na obsahovou revizi; zatím jsou to Carrd verze.
-- Kontaktní formulář: Carrd ho obsluhoval na svojí straně (AJAX na `/post/contact`).
-  V replice je nahrazený Formspree, protože Pages nic serverového neumí. **Používá zatím
-  stejný endpoint jako hub (`xkgnqpnz`)** — odlišen jen skrytým polem `_subject`.
-  Až bude čas, založit Feedcu vlastní formulář. Honeypot `input[name="mail"]` z originálu
-  je zachovaný.
+- **Kontaktní formulář (vyřešeno 26. 7. 2026):** Carrd ho obsluhoval na svojí straně
+  (AJAX na `/post/contact`), replika mezitím jela přes sdílený Formspree endpoint
+  hubu (`xkgnqpnz`). Teď posílá `POST` na vlastní Supabase edge funkci `web-lead`
+  v projektu `ClientDB4AI` (`https://gygwfcattcunbikootbx.supabase.co/functions/v1/web-lead`) —
+  ověří honeypot (`input[name="mail"]`, zachovaný z originálu) a rate limit (3× / 10 min
+  na IP), uloží lead do `public.web_leads` (sloupec `site` pro budoucí sdílení
+  s jakubsevela.cz / ethel.cz) a přes Resend pošle notifikaci na `kontakt@feedco.cz`
+  i automatickou odpověď odesílateli. Odpovídá 303 redirectem zpět na
+  `feedco.cz/?odeslano=1#kontakt` (nebo `?chyba=1` / `?chyba=limit`), inline skript
+  v patičce `index.html` podle toho zobrazí `#kontakt-status` a schová formulář.
+  Odesílací doména `feedco.cz` čeká na verifikaci u Resendu (DKIM/SPF DNS záznamy
+  přidané do zóny na Webglobe) — dokud neproběhne, e-maily se neodešlou, ale lead
+  se do DB uloží vždy.
 - **Google Ads konverze `AW-986763051` z originálu nebyla přenesena** — v Carrdu byla
   vložená *před* definicí `gtag()`, takže vyhazovala chybu a nikdy nefungovala. GA4
   (`G-ZK1160VT0P`) přenesené je a funguje. Jestli má konverze fungovat, musí se vložit
