@@ -1,6 +1,6 @@
 /* ==========================================================================
    Brand tokeny — Jakub Ševela / Ethel / Feedco
-   Zdroj pravdy: /brand/ (grafický manuál v1.1, 25. 7. 2026)
+   Zdroj pravdy: /brand/ (grafický manuál v1.2, 26. 7. 2026)
 
    Tenhle soubor je shodný ve všech třech repozitářích (jakubsevela-web,
    feedco-web, ethel-web). Mění se jen blok "accent" podle značky.
@@ -28,6 +28,14 @@
   --font-body: 'DM Sans', system-ui, sans-serif;
   --font-mono: 'DM Mono', ui-monospace, monospace;
   --font-wordmark: 'Space Grotesk', sans-serif;  /* JEN wordmark a monogram */
+
+  /* Čím větší nadpis, tím lehčí řez. Velké nadpisy v Lora 400 nekonkurují
+     fotce ani accentu; malé by ve 400 byly bez důrazu, proto 500. */
+  --weight-display: 400;   /* h1, h2 — velké nadpisy */
+  --weight-heading: 500;   /* h3, h4 — nadpisy karet a bloků */
+
+  /* --- layout --- */
+  --content-max: 1200px;   /* obsahový kontejner; hero je výjimka od kraje ke kraji */
 
   /* --- accent: feedco.cz = limetková (~85°) --- */
   --accent: #9ed455;
