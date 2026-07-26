@@ -37,9 +37,17 @@ Nikdy nepiš hexy natvrdo — `index.html` už je na tokenech postavený.
 ### Sdílená patička
 
 Blok `<footer>` je označený komentářem a má být **shodný na všech třech webech**. Mění se
-jen wordmark, věta pod ním, prolinky na zbylé dva weby a disclaimer. Struktura, CSS
-a právní blok (Mgr. Jakub Ševela, Lidická 700/19, 602 00 Brno, IČ, DIČ) jsou stejné.
+jen wordmark, věta pod ním, prolinky na zbylé dva weby a disclaimer. Struktura, CSS,
+kontaktní blok (e-mail na dané doméně, +420 774 267 301, LinkedIn) a právní blok
+(Mgr. Jakub Ševela, Lidická 700/19, 602 00 Brno, IČ, DIČ) jsou stejné.
 Když patičku měníš, propiš to do `jakubsevela-web` a `ethel-web`.
+
+Label u prolinků se liší podle role webu: na produktových webech (feedco.cz, ethel.cz)
+je **„Od stejného autora"**, na hubu jakubsevela.cz bude **„Produkty"**. Nepoužívat
+generické „Další weby" — neříká, co ty weby spojuje.
+
+Kontaktní e-mail se řídí doménou webu: `kontakt@feedco.cz` zde, na ethel.cz `info@ethel.cz`.
+Telefon a LinkedIn jsou společné.
 
 ### Wordmark v hlavičce
 
