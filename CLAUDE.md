@@ -17,9 +17,17 @@ textu je wordmark: `FEEDCO` → `feedco.` podle pravidla z manuálu. Obsahová r
 
 Pořadí dotahování webů je hub → feedco → ethel.
 
+**Pozor: web je na typografii z v1.1, manuál je mezitím na v1.2.** Rozdíly, které se
+sem ještě nepropsaly: nadpisy mají být lehčí (`--weight-display` 400 pro velké,
+`--weight-heading` 500 pro malé — tady jsou natvrdo 600), kontejner má být
+`--content-max` (1200 px, tady je natvrdo 1040 px) a fonty mají být self-hostované
+z npm `@fontsource` místo Google CDN. Tokeny už v repu jsou, jen je CSS nepoužívá.
+
 ## Vizuální systém
 
-Tokeny jsou v **`/brand/tokens.css`**, kompletní manuál na `/brand/`.
+Tokeny jsou v **`/brand/tokens.css`**. Kompletní manuál v tomhle repu **není** —
+žije na jednom místě: <https://jakubsevela.cz/brand/> (zdroj `sevela/jakubsevela-web`, `brand/index.html`).
+Tady je jen `tokens.css`, protože ho web reálně načítá.
 Nikdy nepiš hexy natvrdo — `index.html` už je na tokenech postavený.
 
 - **Dark-first.** Pozadí `--bg` / `--bg-alt`, karty `--card`.
@@ -78,7 +86,7 @@ navigačních odkazů přebije wordmark a ten se vykreslí velkými písmeny v D
 
 `brand/tokens.css` je shodný ve všech třech repech (`jakubsevela-web`, `feedco-web`,
 `ethel-web`) — mění se jen accent blok. Změnu **propiš do ostatních dvou** a do manuálu
-na `/brand/`.
+v `jakubsevela-web/brand/index.html`, který je jediná verze.
 
 ## Ceny — pozor
 

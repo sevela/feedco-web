@@ -9,11 +9,10 @@ Web odchází z Carrdu — `index.html` je zatím replika původní stránky, re
 ## Struktura
 
 ```
-index.html            replika původní Carrd stránky (světlý design, mimo brand systém)
+index.html            web v brand systému (dark-first, limetkový akcent), texty z původní Carrd stránky
 images/               obrázky a loga
 brand/
-  tokens.css          zdroj pravdy pro barvy, typografii, radiusy — accent limetková
-  index.html          grafický manuál v1.1
+  tokens.css          barvy, typografie, radiusy — accent limetková; kopie z jakubsevela-web
 scripts/
   build-fonts.js      self-hosting Google Fonts do /fonts/
 CNAME                 feedco.cz
@@ -38,5 +37,8 @@ Push do `main`. Pages vystaví do minuty.
 
 ## Grafický manuál
 
-`/brand/` — živý dokument, shodný napříč všemi třemi weby. Při změně palety nebo komponent
-ho aktualizuj a propiš `tokens.css` do `jakubsevela-web` a `ethel-web`.
+Manuál žije na **jednom místě**: <https://jakubsevela.cz/brand/> (zdroj `sevela/jakubsevela-web`,
+soubor `brand/index.html`). V tomhle repu je jen `tokens.css`, protože ho web načítá.
+
+Při změně palety nebo komponent aktualizuj manuál tam a `tokens.css` propiš sem
+a do `ethel-web`.
