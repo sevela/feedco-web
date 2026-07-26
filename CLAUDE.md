@@ -7,21 +7,18 @@ prolinkovaný s [jakubsevela.cz](https://jakubsevela.cz), nikoli pod ním.
 
 ## Stav
 
-Web odešel z Carrdu na GitHub Pages a **je přestylovaný podle grafického manuálu v1.1**
-(26. 7. 2026) — dark-first paleta, limetkový akcent, Lora + DM Sans + DM Mono, tónovaná
-tlačítka, radius 8/12. Tokeny se berou z `/brand/tokens.css`, žádné hexy natvrdo.
+Web odešel z Carrdu na GitHub Pages a **je přestylovaný podle grafického manuálu**
+(dark-first paleta, limetkový akcent, Lora + DM Sans + DM Mono, tónovaná tlačítka,
+radius 8/12, kontejner `--content-max`, fonty self-hostované). Naposledy sjednoceno
+s manuálem **v1.6** (26. 7. 2026): hero má jednotnou stavbu z hubu (chip label, velké H1,
+dvě CTA, ~84vh) a tarify jsou tři price-cards podle sekce 09 manuálu.
+Tokeny se berou z `/brand/tokens.css`, žádné hexy natvrdo.
 
 **Texty jsou pořád ty z původní Carrd stránky**, změnil se jen vizuál. Jediná změna
 textu je wordmark: `FEEDCO` → `feedco.` podle pravidla z manuálu. Obsahová revize
 (strukura, argumentace, ceny) je samostatný krok, který ještě nenastal.
 
 Pořadí dotahování webů je hub → feedco → ethel.
-
-**Pozor: web je na typografii z v1.1, manuál je mezitím na v1.2.** Rozdíly, které se
-sem ještě nepropsaly: nadpisy mají být lehčí (`--weight-display` 400 pro velké,
-`--weight-heading` 500 pro malé — tady jsou natvrdo 600), kontejner má být
-`--content-max` (1200 px, tady je natvrdo 1040 px) a fonty mají být self-hostované
-z npm `@fontsource` místo Google CDN. Tokeny už v repu jsou, jen je CSS nepoužívá.
 
 ## Vizuální systém
 
@@ -112,9 +109,6 @@ Disclaimer „není produktem Asseco Solutions" na produktovém webu zůstává.
 
 ## Známý technický dluh
 
-- **Hero obrázek `images/image01.png` je mimo paletu** — tyrkysovo-mintová grafika
-  s oranžovými čárami z Carrdu. Je to nejnápadnější prvek stránky a bije se s limetkovou.
-  Potřebuje překreslit do brandu, nebo vypustit.
 - Barva `#ff9999` z originálu (u „bez Feedca") v paletě není. Nahrazena `--text-3`, takže
   kontrast mezi „bez Feedca" (utlumené) a „s Feedcem" (akcent) drží bez cizí barvy.
 - Vypuštěno z Carrdu jako neslučitelné s manuálem: mintový geometrický podklad na celé
@@ -139,12 +133,9 @@ Disclaimer „není produktem Asseco Solutions" na produktovém webu zůstává.
   vložená *před* definicí `gtag()`, takže vyhazovala chybu a nikdy nefungovala. GA4
   (`G-ZK1160VT0P`) přenesené je a funguje. Jestli má konverze fungovat, musí se vložit
   až za GA4 snippet a navázat na odeslání formuláře, ne na načtení stránky.
-- Chybí `og-image.jpg` (meta tagy na něj odkazují) a favicony.
-  `ethel-web` má generátor v `scripts/generate-og.js`.
-- Obrázky v `/images/` (`image01.png` hero, `image02`–`05.jpg` fotky referencí,
-  `image06.jpg` v patičce) se stahují z Carrdu ručně. Když fotka chybí, `onerror` ji
-  odstraní a u referencí se ukáže iniciála z `data-initials`; hero obrázek se skryje celý.
-- Fonty jdou z Google Fonts CDN; `ethel-web` je má self-hostované.
-  Sjednotit přes `node scripts/build-fonts.js`.
+- Chybí `og-image.jpg` (meta tagy na něj odkazují). Favicony už jsou (monogram `f.`,
+  26. 7.); generátor og-image má `jakubsevela-web` v `scripts/generate-og.js`.
+- Fotky referencí (`image02`–`05.jpg`) se stahují z Carrdu ručně. Když fotka chybí,
+  `onerror` ji nahradí iniciálami.
 - Kalkulačka (`feedco-kalkulacka-v2.html`) žije mimo repo a čeká na rozhodnutí,
   jestli půjde na web veřejně, nebo zůstane interním nástrojem.
