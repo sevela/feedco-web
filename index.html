@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Feedco</title>
-<meta name="description" content="Feedco - E-commerce konektor pro Helios">
+<meta name="description" content="Propojte Helios se světem e-commerce. Feedco automatizuje přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery — objednávky, produkty, sklady i ceny.">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Jakub Ševela">
@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Feedco">
 <meta property="og:title" content="Feedco">
 <meta property="og:type" content="website">
-<meta property="og:description" content="Feedco - E-commerce konektor pro Helios">
+<meta property="og:description" content="Propojte Helios se světem e-commerce. Feedco automatizuje přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery — objednávky, produkty, sklady i ceny.">
 <meta property="og:url" content="https://feedco.cz/">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:image" content="https://feedco.cz/og-image.jpg">
@@ -168,7 +168,10 @@ em { font-style: italic; }
   background: var(--accent-tint);
   border-radius: var(--radius-btn);
 }
-#home .lede { font-size: clamp(2.3rem, 4.8vw, 3.8rem); line-height: 1.2; max-width: 16ch; }
+/* max 3.5rem (ne 3.8 z manuálu): druhý řádek „se světem e-commerce" se musí
+   vejít do textového sloupce vcelku — při 3.8rem se lámal uvnitř „e-commerce" */
+#home .lede { font-size: clamp(2.3rem, 4.8vw, 3.5rem); line-height: 1.2; max-width: 21ch; }
+#home .lede .nowrap { white-space: nowrap; }
 #home .body-text { font-size: 1.05rem; max-width: 52ch; }
 #home .btn-row { margin-top: 8px; }
 @media (max-width: 820px) {
@@ -486,9 +489,9 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
   <div class="wrap">
     <div class="cols hero">
       <div class="stack">
-        <span class="hero-label">Feeds &amp; Connectors</span>
-        <h1 class="lede">E-commerce konektor pro Helios</h1>
-        <p class="body-text"><strong>Feedco (zkratka pro feeds &amp; connectors)</strong> je modulární služba, která propojuje <mark>Helios Inuvio</mark> s e-commerce světem. Umožňuje automatizovat přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery. Zrychluje procesy, minimalizuje ruční práci a šetří čas.</p>
+        <span class="hero-label">Integrace pro Helios Inuvio</span>
+        <h1 class="lede">Propojte Helios<br>se světem <span class="nowrap">e-commerce</span></h1>
+        <p class="body-text"><strong>Feedco</strong> automatizuje přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery. Synchronizuje objednávky, produkty, sklady i&nbsp;ceny, eliminuje ruční přepisování dat a zjednodušuje každodenní provoz.</p>
         <ul class="btn-row">
           <li><a href="#kontakt" class="btn" role="button"><span>Získat nabídku</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
           <li><a href="#tarify" class="btn ghost" role="button"><span>Tarify</span></a></li>

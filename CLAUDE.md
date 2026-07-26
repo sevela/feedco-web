@@ -14,9 +14,11 @@ s manuálem **v1.6** (26. 7. 2026): hero má jednotnou stavbu z hubu (chip label
 dvě CTA, ~84vh) a tarify jsou tři price-cards podle sekce 09 manuálu.
 Tokeny se berou z `/brand/tokens.css`, žádné hexy natvrdo.
 
-**Texty jsou pořád ty z původní Carrd stránky**, změnil se jen vizuál. Jediná změna
-textu je wordmark: `FEEDCO` → `feedco.` podle pravidla z manuálu. Obsahová revize
-(strukura, argumentace, ceny) je samostatný krok, který ještě nenastal.
+**Texty jsou z původní Carrd stránky** s dvěma výjimkami: wordmark `FEEDCO` → `feedco.`
+podle pravidla z manuálu a **hero text nový od Jakuba (26. 7. 2026)** — label „Integrace
+pro Helios Inuvio", H1 „Propojte Helios se světem e-commerce", nový perex; meta a og
+description s ním sjednocené. Obsahová revize zbytku stránky (strukura, argumentace,
+ceny) je samostatný krok, který ještě nenastal.
 
 Pořadí dotahování webů je hub → feedco → ethel.
 
