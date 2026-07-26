@@ -139,17 +139,33 @@ em { font-style: italic; }
 
 /* --- mřížky -------------------------------------------------------------- */
 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
-.cols.hero { grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: center; }
-@media (max-width: 820px) { .cols, .cols.hero { grid-template-columns: 1fr; gap: 40px; } }
+@media (max-width: 820px) { .cols { grid-template-columns: 1fr; gap: 40px; } }
 
 /* --- hero: jednotná stavba podle manuálu v1.6 (vzor jakubsevela.cz) -------
-   chip label → H1 → popisek → CTA, výška ~84vh, radiální záře vlevo nahoře.
-   Vizuál tady není fotka od kraje, ale SVG grafika v kontejneru. */
+   chip label → H1 → popisek → CTA, radiální záře vlevo nahoře. Vizuál je jako
+   fotka na hubu: absolutně vpravo od konce textového sloupce, zvětšený,
+   s fade přechodem do pozadí. Text kotvený dole (flex-end) jako na hubu;
+   sticky navigace je v toku, proto se její výška (65 px) odečítá,
+   aby spodní hrana textu seděla na stejném místě viewportu jako na hubu. */
 #home {
   position: relative; overflow: hidden;
-  min-height: 84vh; min-height: 84svh;
-  display: flex; align-items: center;
-  padding: 96px 0;
+  min-height: calc(84vh - 65px); min-height: calc(84svh - 65px);
+  display: flex; align-items: flex-end;
+  padding: 105px 0 96px;
+}
+.hero-visual {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  left: max(46%, calc(50% - 60px));
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-visual .hero-art { width: min(92%, 680px); height: auto; max-width: none; margin: 0; }
+/* fade jako u hero fotky na hubu — vizuál se rozpouští do pozadí vlevo a dole */
+.hero-visual::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to right, var(--bg) 0%, rgba(10,10,12,0.72) 26%, rgba(10,10,12,0) 64%),
+    linear-gradient(to top, var(--bg) 0%, rgba(10,10,12,0.30) 16%, rgba(10,10,12,0) 40%),
+    linear-gradient(to bottom, rgba(10,10,12,0.75) 0%, rgba(10,10,12,0) 16%);
 }
 #home::before {
   content: ''; position: absolute; top: -260px; left: -200px;
@@ -175,7 +191,10 @@ em { font-style: italic; }
 #home .body-text { font-size: 1.05rem; max-width: 52ch; margin-top: 1.5rem; }
 #home .btn-row { margin-top: 2.3rem; }
 @media (max-width: 820px) {
-  #home { min-height: 0; padding: 72px 0 64px; }
+  #home { display: flex; flex-direction: column; min-height: 0; padding: 72px 0 64px; }
+  .hero-visual { position: static; order: 2; margin-top: 44px; } /* text první, vizuál pod ním */
+  .hero-visual .hero-art { width: 100%; max-width: 460px; margin: 0 auto; display: block; }
+  .hero-visual::after { display: none; }
 }
 
 /* --- tlačítko: tónované, 12 % podklad + 35 % border --------------------- */
@@ -486,19 +505,8 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
 
 <!-- ============================== HERO ============================== -->
 <section id="home">
-  <div class="wrap">
-    <div class="cols hero">
-      <div class="stack">
-        <span class="hero-label">Integrace pro Helios Inuvio</span>
-        <h1 class="lede">Propojte Helios<br>se světem <span class="nowrap">e-commerce</span></h1>
-        <p class="body-text"><strong>Feedco</strong> automatizuje přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery. Synchronizuje objednávky, produkty, sklady i&nbsp;ceny, eliminuje ruční přepisování dat a zjednodušuje každodenní provoz.</p>
-        <ul class="btn-row">
-          <li><a href="#kontakt" class="btn" role="button"><span>Získat nabídku</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
-          <li><a href="#tarify" class="btn ghost" role="button"><span>Tarify</span></a></li>
-        </ul>
-      </div>
-      <div>
-        <svg class="hero-art" viewBox="0 0 520 520" role="img" aria-label="Feedco obousměrně propojuje Helios Inuvio s e-shopy a API; feedy dodavatelů se do něj jen načítají">
+  <div class="hero-visual">
+    <svg class="hero-art" viewBox="0 0 520 520" role="img" aria-label="Feedco obousměrně propojuje Helios Inuvio s e-shopy a API; feedy dodavatelů se do něj jen načítají">
          <defs>
           <radialGradient id="coreG" cx="50%" cy="34%" r="76%">
            <stop offset="0%" stop-color="#1c2018"/><stop offset="62%" stop-color="#15161a"/><stop offset="100%" stop-color="#111114"/>
@@ -545,8 +553,15 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
            <g class="i-db2" transform="translate(186.73863983154297,426) scale(1.25)"><ellipse class="ico" cx="12" cy="5.6" rx="8" ry="3.1"/><path class="ico" d="M4 5.6v12.8c0 1.72 3.58 3.1 8 3.1s8-1.38 8-3.1V5.6"/><path class="ico" d="M20 12c0 1.72-3.58 3.1-8 3.1S4 13.72 4 12"/></g><text class="nname" x="230.73863983154297" y="446.9090909957886" text-anchor="start">Helios Inuvio</text>
          </g>
         </svg>
-      </div>
-    </div>
+  </div>
+  <div class="wrap">
+    <span class="hero-label">Integrace pro Helios Inuvio</span>
+        <h1 class="lede">Propojte Helios<br>se světem <span class="nowrap">e-commerce</span></h1>
+        <p class="body-text"><strong>Feedco</strong> automatizuje přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery. Synchronizuje objednávky, produkty, sklady i&nbsp;ceny, eliminuje ruční přepisování dat a zjednodušuje každodenní provoz.</p>
+        <ul class="btn-row">
+          <li><a href="#kontakt" class="btn" role="button"><span>Získat nabídku</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
+          <li><a href="#tarify" class="btn ghost" role="button"><span>Tarify</span></a></li>
+        </ul>
   </div>
 </section>
 
