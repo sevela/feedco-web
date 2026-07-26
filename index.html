@@ -197,9 +197,8 @@ em { font-style: italic; }
 .ticks.lg li { font-size: 16.5px; }
 
 /* --- reference (komponenta z manuálu — shodná s jakubsevela.cz) ----------- */
-/* 4 reference → mřížka 2×2; při 6+ použít minmax(290px,1fr) jako na hubu (3 sloupce) */
-.ref-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); margin-top: 20px; }
-@media (max-width: 480px) { .ref-grid { grid-template-columns: 1fr; } }
+/* výchozí 3 sloupce; auto-fit sám ubere na 2, pak na 1 s klesající šířkou */
+.ref-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); margin-top: 20px; }
 .quote-card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: var(--radius-card); padding: 30px;
