@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Feedco</title>
 <meta name="description" content="Feedco - E-commerce konektor pro Helios">
-<meta name="color-scheme" content="light only">
+<meta name="color-scheme" content="dark">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Jakub Ševela">
 <link rel="canonical" href="https://feedco.cz/">
@@ -24,218 +24,226 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Lora:ital,wght@0,500;0,600;1,500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="/brand/tokens.css">
 <style>
 /* ==========================================================================
-   Replika původní Carrd stránky. Barvy, typografie a rozvržení odpovídají
-   originálu; markup je přepsaný do sémantického HTML, aby se s tím dalo
-   pracovat. Brand tokeny v /brand/tokens.css se ZATÍM nepoužívají —
-   platí až pro redesign. Viz CLAUDE.md.
+   feedco.cz — přestylováno podle grafického manuálu v1.1 (26. 7. 2026).
+   Barvy, typografie, komponenty a radiusy z /brand/tokens.css.
+   Texty jsou shodné s předchozí replikou Carrdu; změnil se jen vizuál.
    ========================================================================== */
-:root {
-  --bg: #171A1C;
-  --text: #ffffff;
-  --text-2: #cccccc;
-  --mint: #00ffc2;
-  --mint-bright: #33ffc2;
-  --coral: #ff9999;
-  --line: rgba(255,255,255,0.09);
-  --btn-fill: #339977;
-  --width: 65rem;
-}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 18pt; scroll-behavior: smooth; }
-@media (max-width: 1680px) { html { font-size: 13pt; } }
-@media (max-width: 980px)  { html { font-size: 11pt; } }
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', system-ui, sans-serif;
-  line-height: 1.75;
-  min-width: 320px;
-  overflow-x: hidden;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
-/* geometrické pozadí z originálu */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20width%3D%22640%22%20height%3D%22480%22%20viewBox%3D%220%200%20640%20480%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Cstyle%20type%3D%22text%2Fcss%22%3E%20rect%20%7B%20opacity%3A%200.5%3B%20%7D%20polygon%20%7B%20opacity%3A%200.75%3B%20%7D%20%3C%2Fstyle%3E%20%3Cg%3E%20%3ClinearGradient%20id%3D%22bggrad%22%20gradientUnits%3D%22userSpaceOnUse%22%20x1%3D%220%22%20y1%3D%22239.5937%22%20x2%3D%22640%22%20y2%3D%22239.5937%22%20gradientTransform%3D%22matrix%281%200%200%20-1%200%20479.5%29%22%3E%20%3Cstop%20offset%3D%220%22%20style%3D%22stop-color%3Atransparent%22%2F%3E%20%3Cstop%20offset%3D%220.3743%22%20style%3D%22stop-color%3Argba(85,201,111,0.059)%22%2F%3E%20%3Cstop%20offset%3D%220.7682%22%20style%3D%22stop-color%3Atransparent%22%2F%3E%20%3Cstop%20offset%3D%221%22%20style%3D%22stop-color%3Argba(85,201,111,0.059)%22%2F%3E%20%3C%2FlinearGradient%3E%20%3Crect%20style%3D%22fill%3Aurl%28%23bggrad%29%3B%22%20width%3D%22640%22%20height%3D%22479.8%22%20%2F%3E%20%3C%2Fg%3E%20%3Cg%3E%20%3ClinearGradient%20id%3D%22l1grad%22%20gradientUnits%3D%22userSpaceOnUse%22%20x1%3D%22180.3663%22%20y1%3D%22333.5278%22%20x2%3D%2272.0669%22%20y2%3D%22521.1078%22%20gradientTransform%3D%22matrix%281%200%200%20-1%200%20479.5%29%22%3E%20%3Cstop%20offset%3D%220%22%20style%3D%22stop-color%3Argba(85,201,111,0.059)%22%2F%3E%20%3Cstop%20offset%3D%221%22%20style%3D%22stop-color%3Atransparent%22%2F%3E%20%3C%2FlinearGradient%3E%20%3Cpolygon%20style%3D%22fill%3Aurl%28%23l1grad%29%3B%22%20points%3D%220%2C69%2092.3%2C196.8%20232%2C0%200%2C0%22%2F%3E%20%3C%2Fg%3E%20%3Cg%3E%20%3ClinearGradient%20id%3D%22l3grad%22%20gradientUnits%3D%22userSpaceOnUse%22%20x1%3D%22307.3333%22%20y1%3D%22161.2493%22%20x2%3D%22307.3333%22%20y2%3D%22479.5%22%20gradientTransform%3D%22matrix%281%200%200%20-1%200%20479.5%29%22%3E%20%3Cstop%20offset%3D%220%22%20style%3D%22stop-color%3Argba(85,201,111,0.059)%22%2F%3E%20%3Cstop%20offset%3D%221%22%20style%3D%22stop-color%3Atransparent%22%2F%3E%20%3C%2FlinearGradient%3E%20%3Cpolygon%20style%3D%22fill%3Aurl%28%23l3grad%29%3B%22%20points%3D%2292.7%2C196.4%20514.7%2C0%20522%2C0%20328.7%2C318.3%22%2F%3E%20%3C%2Fg%3E%20%3Cg%3E%20%3ClinearGradient%20id%3D%22l5grad%22%20gradientUnits%3D%22userSpaceOnUse%22%20x1%3D%22327.3333%22%20y1%3D%22142.6941%22%20x2%3D%22640%22%20y2%3D%22142.6941%22%20gradientTransform%3D%22matrix%281%200%200%20-1%200%20479.5%29%22%3E%20%3Cstop%20offset%3D%220%22%20style%3D%22stop-color%3Argba(85,201,111,0.059)%22%2F%3E%20%3Cstop%20offset%3D%220.8596%22%20style%3D%22stop-color%3Atransparent%22%2F%3E%20%3C%2FlinearGradient%3E%20%3Cpolygon%20style%3D%22fill%3Aurl%28%23l5grad%29%3B%22%20points%3D%22327.3%2C317.1%20571.3%2C235.4%20640%2C276.3%20640%2C438.2%22%2F%3E%20%3C%2Fg%3E%20%3Cg%3E%20%3ClinearGradient%20id%3D%22l6grad%22%20gradientUnits%3D%22userSpaceOnUse%22%20x1%3D%22291.9083%22%20y1%3D%2222.7335%22%20x2%3D%22129.2015%22%20y2%3D%22304.55%22%20gradientTransform%3D%22matrix%281%200%200%20-1%200%20479.5%29%22%3E%20%3Cstop%20offset%3D%220%22%20style%3D%22stop-color%3Argba(85,201,111,0.059)%22%2F%3E%20%3Cstop%20offset%3D%221%22%20style%3D%22stop-color%3Atransparent%22%2F%3E%20%3C%2FlinearGradient%3E%20%3Cpolygon%20style%3D%22fill%3Aurl%28%23l6grad%29%3B%22%20points%3D%2292.3%2C196.2%20189.9%2C480%20251.7%2C480%20327.5%2C318.4%22%2F%3E%20%3C%2Fg%3E%3C%2Fsvg%3E');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.page { position: relative; z-index: 2; }
-.inner {
-  width: var(--width);
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 6rem 3rem;
-}
-@media (max-width: 736px) { .inner { padding: 4rem 2rem; } }
-.inner > * + * { margin-top: 2rem; }
 
-a { color: inherit; text-decoration: underline; transition: color .25s ease; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 640px) { .wrap { padding: 0 20px; } }
 
-/* --- typografie: mapa na styly z originálu --- */
-.kicker {           /* style-4 */
-  text-transform: uppercase; color: var(--mint-bright);
-  font-size: 1.5em; line-height: 1.5; font-weight: 700;
+section { padding: 72px 0; }
+section + section { border-top: 1px solid var(--border); }
+.stack > * + * { margin-top: 20px; }
+
+a { color: inherit; }
+
+/* --- typografie ---------------------------------------------------------- */
+.wordmark-lg {
+  font-family: var(--font-wordmark);
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1;
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
 }
-.kicker a { text-decoration: none; }
-.kicker a:hover { text-decoration: underline; }
-.lede {             /* style-3 */
-  font-size: 2em; line-height: 1.125; font-weight: 600;
+.wordmark-lg a { text-decoration: none; }
+.wordmark-lg .dot { color: var(--accent); font-weight: 700; font-size: 1.25em; line-height: 1; }
+
+.lede {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  max-width: 20ch;
 }
-.body-text { font-size: 1em; line-height: 1.75; font-weight: 500; }   /* style-2 */
-.section-title { font-size: 1.5em; line-height: 1.25; font-weight: 600; }  /* style-1 */
-.section-intro { font-size: 1.125em; line-height: 1.75; font-weight: 300; }  /* style-6 */
-.module-text { font-size: 1em; line-height: 1.75; font-weight: 400; }  /* style-11 */
-.module-text a { color: var(--mint); }
-.note { font-size: 1.125em; line-height: 1.75; font-weight: 500; font-style: italic; }  /* style-10 */
-.price { font-size: 1.5em; line-height: 1.5; font-weight: 600; }  /* style-7 */
-.quote { color: var(--text-2); font-size: 1em; line-height: 1.75; font-weight: 500; }  /* style-9 */
-.quote em { font-style: italic; }
-.quote .author { display: block; margin-top: 1rem; color: var(--mint); }
-mark { background: transparent; color: inherit; }
-strong { font-weight: 700; }
+@media (max-width: 640px) { .lede { font-size: 30px; max-width: none; } }
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.module-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+/* label rozlišující sloupce v kartě tarifu — mono role z manuálu */
+.col-label {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-l);
+}
+
+.body-text { font-size: 17px; line-height: 1.7; color: var(--text-2); }
+.body-text strong { color: var(--text); font-weight: 700; }
+.section-intro { font-size: 16px; line-height: 1.7; color: var(--text-2); max-width: 68ch; }
+.module-text { font-size: 15.5px; line-height: 1.7; color: var(--text-2); }
+.note { font-size: 16px; line-height: 1.7; color: var(--text-2); font-style: italic; }
+.price { font-family: var(--font-display); font-weight: 600; font-size: 24px; line-height: 1.3; }
+
+.accent { color: var(--accent-l); font-style: normal; }
+.muted  { color: var(--text-3); font-style: normal; }
+mark { background: transparent; color: var(--text); }
 em { font-style: italic; }
 
-/* --- navigace --- */
+/* odkazy v textu — light odstín + podtržení, hover zesílí */
+.module-text a, .note a {
+  color: var(--accent-l);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.module-text a:hover, .note a:hover { text-decoration-thickness: 2px; }
+
+/* --- navigace ------------------------------------------------------------ */
 .topnav {
-  display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 1.5rem;
-  list-style: none; text-transform: uppercase;
-  font-size: 1em; font-weight: 500;
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(10, 10, 12, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
 }
-.topnav a { text-decoration: none; }
-.topnav a:hover { text-decoration: underline; }
-
-/* --- dvousloupcové bloky --- */
-.cols { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 2.375rem; }
-.cols > * { flex: 1 1 calc(50% - 1.1875rem); min-width: 0; }
-.cols.hero > :first-child { flex: 1 1 58%; }
-.cols.hero > :last-child  { flex: 1 1 34%; }
-.cols.testimonial { gap: 2.375rem; align-items: flex-start; }
-.cols.testimonial > :first-child { flex: 0 0 6rem; }
-.cols.testimonial > :last-child  { flex: 1 1 0; min-width: 0; }
-.cols > div > * + * { margin-top: 2rem; }
-@media (max-width: 736px) {
-  .cols { flex-direction: column; gap: 3.875rem; }
-  .cols > *, .cols.hero > *, .cols.testimonial > * { flex: 1 1 100% !important; width: 100%; }
-  .cols.testimonial { text-align: center; align-items: center; }
+.topnav .wrap { display: flex; justify-content: flex-end; gap: 24px; padding-top: 16px; padding-bottom: 16px; overflow-x: auto; }
+.topnav a {
+  font-family: var(--font-mono);
+  font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-2); text-decoration: none; white-space: nowrap;
+  transition: color 0.15s;
 }
+.topnav a:hover { color: var(--text); }
+.topnav ul { list-style: none; display: flex; gap: 24px; }
 
-/* --- oddělovač (vlnka z originálu) --- */
-.divider {
-  border: 0; height: 1.5rem; width: 100vw;
-  margin: 6rem 0 6rem calc(50% - 50vw);
-  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20x%3D%220px%22%20y%3D%220px%22%20viewBox%3D%220%200%20512%20512%22%20width%3D%22512%22%20height%3D%22512%22%20preserveAspectRatio%3D%22none%22%3E%3Cstyle%3Epath%20%7Bfill%3A%20none%3Bstroke-width%3A%201px%3Bstroke%3A%20rgba(255,255,255,0.09)%3Bvector-effect%3A%20non-scaling-stroke%3B%7D%3C%2Fstyle%3E%3Cpath%20d%3D%22M0%2C320c128%2C0%2C128-128%2C256-128s128%2C128%2C256%2C128%22%20%2F%3E%3C%2Fsvg%3E');
-  background-size: auto 125%;
-  background-position: center;
-  background-repeat: repeat-x;
-}
-@media (max-width: 736px) { .divider { margin-top: 4rem; margin-bottom: 4rem; } }
+/* --- mřížky -------------------------------------------------------------- */
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+.cols.hero { grid-template-columns: 1.35fr 1fr; gap: 48px; align-items: center; }
+@media (max-width: 820px) { .cols, .cols.hero { grid-template-columns: 1fr; gap: 40px; } }
 
-/* --- odrážky s plus ikonou --- */
-.ticks { list-style: none; }
-.ticks > li { display: flex; align-items: flex-start; }
-.ticks > li::before {
-  content: ''; display: block; flex: 0 0 auto;
-  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Cpath%20d%3D%22M36%2C18.3v3.4c0%2C1-.8%2C1.9-1.9%2C1.9h-10.5v10.5c0%2C1.1-.8%2C1.9-1.9%2C1.9h-3.4c-1%2C0-1.9-.8-1.9-1.9v-10.5H5.9c-1.1%2C0-1.9-.8-1.9-1.9v-3.4c0-1%2C.8-1.9%2C1.9-1.9h10.5V5.9c0-1.1.8-1.9%2C1.9-1.9h3.4c1%2C0%2C1.9.8%2C1.9%2C1.9v10.5h10.5c1.1%2C0%2C1.9.8%2C1.9%2C1.9Z%22%20fill%3D%22rgba(255,255,255,0.09)%22%20%2F%3E%3C%2Fsvg%3E');
-  background-position: left 60%; background-repeat: no-repeat; background-size: contain;
-  margin-right: .7rem;
-}
-.ticks.lg { font-size: 1.25em; font-weight: 300; }
-.ticks.lg > li::before { height: 2.1875rem; min-width: 1.025rem; }
-.ticks.sm { font-size: 1.125em; font-weight: 400; }
-.ticks.sm > li::before { height: 1.96875rem; min-width: .9228rem; }
-
-/* --- pilulkové tlačítko --- */
-.btn-row { list-style: none; display: flex; flex-wrap: wrap; gap: .75rem; }
+/* --- tlačítko: tónované, 12 % podklad + 35 % border --------------------- */
+.btn-row { list-style: none; display: flex; flex-wrap: wrap; gap: 12px; }
 .btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  flex-direction: row-reverse;
-  height: 3.5rem; padding: 0 1.75rem;
-  font-size: 1em; font-weight: 600; white-space: nowrap;
-  border-radius: 2.5rem; border: solid 3px var(--mint-bright);
-  color: var(--text); text-decoration: none;
-  transition: transform .25s ease, border-color .25s ease;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-body); font-weight: 500; font-size: 14.5px;
+  padding: 11px 20px; border-radius: var(--radius-btn);
+  background: var(--accent-tint);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-l);
+  text-decoration: none; white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
 }
-.btn svg { width: 1em; min-width: 16px; height: 100%; fill: var(--mint); margin-left: .75rem; }
-.btn:hover { transform: scale(1.0425); }
-@media (max-width: 480px) { .btn-row { flex-direction: column; } .btn { width: 100%; max-width: 32rem; } }
+.btn:hover { background: var(--accent-tint-hover); border-color: var(--accent-border-hover); }
+.btn svg { width: 0.9em; height: 0.9em; fill: currentColor; flex: 0 0 auto; }
 
-/* --- karta tarifu --- */
+/* --- karty --------------------------------------------------------------- */
 .tier-card {
-  border: 1px solid var(--line); border-radius: 1.5rem;
-  background-color: var(--bg);
-  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20width%3D%22512%22%20height%3D%22512%22%20preserveAspectRatio%3D%22none%22%3E%20%3Cstyle%3E%20path%20%7B%20fill%3A%20none%3B%20stroke-linecap%3A%20round%3B%20stroke-width%3A%201.01px%3B%20stroke%3A%20rgba(255,255,255,0.09)%3B%20vector-effect%3A%20non-scaling-stroke%3B%20%7D%20%3C%2Fstyle%3E%20%3Cpath%20d%3D%22M-8%2C232L256%2C32%20M520%2C232L256%2C32%22%20%2F%3E%20%3Cpath%20d%3D%22M-8%2C488l264-200%20M520%2C488L256%2C288%22%20%2F%3E%3C%2Fsvg%3E');
-  background-size: 164px; background-repeat: repeat; background-position: center;
-  padding: 2rem 1.5rem;
-  display: flex; flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 32px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
 }
-.tier-card > div { flex: 1 1 calc(50% - 1.5rem); min-width: 0; padding: 0 1.5rem; position: relative; }
-.tier-card > div + div::before {
-  content: ''; position: absolute; left: -1.5px; top: 0; height: 100%;
-  border-left: solid 1px var(--line);
+.tier-card > div { display: flex; flex-direction: column; }
+.tier-card > div > * + * { margin-top: 18px; }
+.tier-card > div + div { border-left: 1px solid var(--border); padding-left: 32px; }
+.tier-card .btn-row { margin-top: auto; padding-top: 4px; }
+@media (max-width: 820px) {
+  .tier-card { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
+  .tier-card > div + div { border-left: 0; border-top: 1px solid var(--border); padding-left: 0; padding-top: 28px; }
 }
-.tier-card > div > * + * { margin-top: 2rem; }
-@media (max-width: 736px) {
-  .tier-card { flex-direction: column; }
-  .tier-card > div { flex: 1 1 100%; padding: 2rem 0; }
-  .tier-card > div:first-child { padding-top: 0; }
-  .tier-card > div:last-child { padding-bottom: 0; }
-  .tier-card > div + div::before {
-    border-left: 0; border-top: solid 1px var(--line);
-    left: 0; top: 0; width: 100%; height: 0;
-  }
-}
+.tier-head { margin-bottom: 28px; }
+.tier-head > * + * { margin-top: 10px; }
 
-/* --- avatary --- */
+/* --- odrážky: plus v mono, akcent ---------------------------------------- */
+.ticks { list-style: none; }
+.ticks li { display: flex; gap: 10px; font-size: 15.5px; line-height: 1.7; color: var(--text-2); }
+.ticks li + li { margin-top: 6px; }
+.ticks li::before {
+  content: '+';
+  font-family: var(--font-mono);
+  color: var(--accent-l);
+  flex: 0 0 auto;
+  line-height: 1.7;
+}
+.ticks.lg li { font-size: 16.5px; }
+
+/* --- reference ----------------------------------------------------------- */
+.testimonial { display: grid; grid-template-columns: 72px 1fr; gap: 24px; align-items: start; }
+.testimonial + .testimonial { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border); }
+@media (max-width: 640px) { .testimonial { grid-template-columns: 56px 1fr; gap: 16px; } }
 .avatar {
-  width: 6rem; height: 6rem; border-radius: 100%; overflow: hidden;
-  border: 1px solid var(--mint); display: flex; align-items: center; justify-content: center;
-  font-weight: 700; color: var(--mint); font-size: 1.25em;
+  width: 72px; height: 72px; border-radius: 50%; overflow: hidden;
+  background: var(--accent-tint); border: 1px solid var(--border-2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-wordmark); font-weight: 700; font-size: 15px;
+  color: var(--accent-l); position: relative;
 }
+@media (max-width: 640px) { .avatar { width: 56px; height: 56px; font-size: 13px; } }
 .avatar::before { content: attr(data-initials); position: absolute; }
-.avatar { position: relative; }
 .avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; position: relative; z-index: 1; }
-.avatar.plain { border-color: transparent; }
-.hero-image { max-width: 100%; }
-.hero-image img { width: 100%; height: auto; display: block; }
+.quote { font-size: 15.5px; line-height: 1.7; color: var(--text-2); }
+.quote .author { display: block; margin-top: 12px; font-size: 14.5px; color: var(--text-2); font-style: normal; }
+.quote .author strong { color: var(--accent-l); font-weight: 700; }
 
-/* --- formulář --- */
-.contact-form { max-width: 34rem; }
-.contact-form > * + * { margin-top: 1rem; }
+.hero-image img { width: 100%; height: auto; display: block; border-radius: var(--radius-card); }
+
+/* --- formulář ------------------------------------------------------------ */
+.contact-form { max-width: 520px; }
+.contact-form > * + * { margin-top: 12px; }
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form input[type="tel"],
 .contact-form textarea {
-  width: 100%; display: block; background: transparent; outline: 0;
-  font-family: inherit; font-size: 1.25em; font-weight: 300;
-  color: var(--text); border: solid 1px var(--line); border-radius: 2.5rem;
+  width: 100%; display: block;
+  font-family: var(--font-body); font-size: 15.5px; line-height: 1.6;
+  color: var(--text); background: var(--bg-alt);
+  border: 1px solid var(--border); border-radius: var(--radius-btn);
+  padding: 12px 14px; outline: 0;
+  transition: border-color 0.15s;
 }
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form input[type="tel"] { height: 3.5rem; padding: 0 1.225rem; }
-.contact-form textarea { height: 10rem; padding: .92rem 1.225rem; line-height: 1.75; border-radius: 1.5rem; resize: vertical; }
-.contact-form ::placeholder { color: var(--text); opacity: .55; }
-.contact-form input[name="mail"] { display: none; }   /* honeypot z originálu */
+.contact-form textarea { height: 150px; resize: vertical; }
+.contact-form :focus-visible { border-color: var(--accent-border-hover); }
+.contact-form ::placeholder { color: var(--text-3); }
+.contact-form input[name="mail"] { display: none; }
 .contact-form button {
-  height: 3.5rem; padding: 0 1.75rem; border: 0; cursor: pointer;
-  font-family: inherit; font-size: 1em; font-weight: 600;
-  border-radius: 2.5rem; background: var(--btn-fill); color: var(--text);
-  transition: background-color .25s ease;
+  font-family: var(--font-body); font-weight: 500; font-size: 14.5px;
+  padding: 11px 22px; border-radius: var(--radius-btn); cursor: pointer;
+  background: var(--accent-tint);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-l);
+  transition: background 0.15s, border-color 0.15s;
 }
-.contact-form button:hover { background: #3aab86; }
-@media (max-width: 480px) { .contact-form button { width: 100%; max-width: 32rem; } }
+.contact-form button:hover { background: var(--accent-tint-hover); border-color: var(--accent-border-hover); }
 
-footer .inner { padding-top: 0; }
+/* --- patička ------------------------------------------------------------- */
+footer { padding: 48px 0 72px; border-top: 1px solid var(--border); }
+footer .inner { display: grid; grid-template-columns: 72px 1fr; gap: 24px; align-items: center; }
+@media (max-width: 640px) { footer .inner { grid-template-columns: 1fr; } }
+footer .body-text { font-size: 14.5px; color: var(--text-3); }
 </style>
 </head>
 <body>
@@ -246,241 +254,262 @@ footer .inner { padding-top: 0; }
   </symbol>
 </svg>
 
-<div class="page">
-<main class="inner">
+<nav class="topnav">
+  <div class="wrap">
+    <ul>
+      <li><a href="#home">Domů</a></li>
+      <li><a href="#funkce">Funkce</a></li>
+      <li><a href="#tarify">Tarify</a></li>
+      <li><a href="#reference">Reference</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <ul class="topnav">
-    <li><a href="#home">Domů</a></li>
-    <li><a href="#funkce">Funkce</a></li>
-    <li><a href="#tarify">Tarify</a></li>
-    <li><a href="#reference">Reference</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
-  </ul>
-
-  <!-- ============================ HERO ============================ -->
-  <section class="cols hero" id="home">
-    <div>
-      <h1 class="kicker"><a href="#home">FEEDCO</a></h1>
-      <h2 class="lede">E-commerce konektor pro Helios</h2>
-      <p class="body-text"><strong>Feedco (zkratka pro feeds &amp; connectors)</strong> je modulární služba, která propojuje <mark>Helios iNuvio</mark> s e-commerce světem. Umožňuje automatizovat přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery. Zrychluje procesy, minimalizuje ruční práci a šetří čas.</p>
-      <ul class="btn-row">
-        <li><a href="#kontakt" class="btn" role="button"><svg aria-hidden="true"><use href="#arrow-right"></use></svg><span>Získat nabídku</span></a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="hero-image"><img src="/images/image01.png" alt="" width="1024" height="1024" onerror="this.closest('.hero-image').remove()"></div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ======================== BEZ / S FEEDCEM ====================== -->
-  <section class="cols">
-    <div>
-      <p class="section-title">Vaše data dnes <span style="color:var(--coral)">bez Feedca</span>...</p>
-      <ul class="ticks lg">
-        <li><p>Ruční párování dat a objednávek</p></li>
-        <li><p>Chyby v dostupnosti a cenách</p></li>
-        <li><p>Zaseklé nebo chybějící objednávky</p></li>
-        <li><p>Duplicitní práce mezi Heliosem a e-shopem</p></li>
-      </ul>
-    </div>
-    <div>
-      <p class="section-title">s <span style="color:var(--mint-bright)">Feedcem</span> to jde jinak...</p>
-      <ul class="ticks lg">
-        <li><p>Automatické toky dat mezi systémy</p></li>
-        <li><p>Validace a čištění dat před odesláním</p></li>
-        <li><p>Monitoring a notifikace při chybách</p></li>
-        <li><p>Jedno místo pro nastavení a kontrolu</p></li>
-      </ul>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ============================ FUNKCE ========================== -->
-  <h2 class="section-title" id="funkce">Co Feedco umí?</h2>
-  <p class="section-intro">Feedco pokrývá klíčové oblasti e-commerce provozu postaveného na Helios iNuvio. Každý z&nbsp;připravených modulů řeší konkrétní část datového a procesního toku mezi <mark>vašimi interními systémy, e-shopem a vašimi obchodními partnery</mark>. Služba je koncipována tak, aby mohla růst s vašimi aktuálními potřebami (obchodními, technickými) – od jednoduchého napojení jednoho e-shopu až po pokročilou vícezdrojovou automatizaci objednávek a dokladů.</p>
-
-  <section class="cols">
-    <div>
-      <h3 class="kicker">E-shop konektor</h3>
-      <p class="module-text">Tento modul slouží jako most mezi Heliosem a e-shopovou platformou klienta. Zajišťuje obousměrnou výměnu dat o objednávkách a expedici, čímž odstraňuje nutnost ručního přepisování údajů a snižuje chybovost. Nejčastěji napojujeme <a href="https://www.upgates.cz/">Upgates</a> a <a href="https://www.shoptet.cz/">Shoptet</a>. K dispozici máme také vlastní Feedco API.</p>
-    </div>
-    <div>
-      <h3 class="kicker">Feed konektor</h3>
-      <p class="module-text">Feed konektor zajišťuje import produktových dat od externích dodavatelů&nbsp;– typicky ve formě XML nebo CSV feedů. Modul umí data načítat, upravit podle pravidel klienta a zanést do Heliosu. Je ideální pro firmy, které spravují velké množství produktů od různých dodavatelů.</p>
-    </div>
-  </section>
-
-  <section class="cols">
-    <div>
-      <h3 class="kicker">Vydané objednávky</h3>
-      <p class="module-text">Modul určený pro firmy, které pravidelně objednávají zboží od dodavatelů a chtějí tento proces zcela automatizovat. Systém sleduje aktuální zásoby, nově přijaté objednávky a na základě definovaných pravidel generuje a odesílá nákupní objednávky.</p>
-    </div>
-    <div>
-      <h3 class="kicker">Přijaté objednávky</h3>
-      <p class="module-text">Tento modul zajišťuje zpracování objednávek přijatých od koncových zákazníků – ať už z e-shopu nebo jiných kanálů. Automatizace šetří čas při rutinních úkonech a zajišťuje konzistentní zpracování všech objednávek. Modul obsahuje také automatické vystavování a odesílání faktur.</p>
-    </div>
-  </section>
-
-  <p class="note"><em>Jednotlivé moduly jsou rozděleny do tarifů podle svých funkcí a lze je spolu <span style="color:var(--mint)">libovolně kombinovat</span>.</em></p>
-  <p class="body-text">👉 <em>Pro jednoduchost jsme pro vás připravili hotové balíčky pokrývající nejčastější scénáře. Rádi vám připravíme <span style="color:var(--mint)">nabídku na míru přesně podle vašich potřeb</span>.</em></p>
-
-  <hr class="divider">
-
-  <!-- ============================ TARIFY ========================== -->
-  <h2 class="section-title" id="tarify">Feedco LITE</h2>
-  <p class="note"><em><span style="color:var(--mint)">Rychlý start pro menší firmy.</span> Jednoduché napojení bez složitostí. Stačí zapnout a funguje.</em></p>
-  <div class="tier-card">
-    <div>
-      <h3 class="kicker">E-shop</h3>
-      <ul class="ticks sm">
-        <li><p>Přenos objednávek z e-shopu do Heliosu</p></li>
-        <li><p>Automatická synchronizace jednou denně</p></li>
-        <li><p>Přenos stavů objednávky zpět na e-shop</p></li>
-      </ul>
-      <p class="module-text">👉 Hodí se pro firmy, které chtějí napojení vyzkoušet v&nbsp;základní podobě nebo mají malý objem objednávek.</p>
-      <p class="price">490 Kč / měsíc</p>
-      <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><svg aria-hidden="true"><use href="#arrow-right"></use></svg><span>Mám zájem</span></a></li></ul>
-    </div>
-    <div>
-      <h3 class="kicker">FEEDY</h3>
-      <ul class="ticks sm">
-        <li><p>Napojení jednoho dodavatelského feedu</p></li>
-        <li><p>Automatická synchronizace jednou denně</p></li>
-        <li><p>V ceně customizace na strukturu feedu</p></li>
-      </ul>
-      <p class="module-text">👉 Vhodné pro start, když potřebujete mít v Heliosu základní data z jednoho feedu.</p>
-      <p class="price">490 Kč / měsíc</p>
-      <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><svg aria-hidden="true"><use href="#arrow-right"></use></svg><span>Mám zájem</span></a></li></ul>
+<!-- ============================== HERO ============================== -->
+<section id="home">
+  <div class="wrap">
+    <div class="cols hero">
+      <div class="stack">
+        <h1 class="wordmark-lg"><a href="#home">feedco<span class="dot">.</span></a></h1>
+        <h2 class="lede">E-commerce konektor pro Helios</h2>
+        <p class="body-text"><strong>Feedco (zkratka pro feeds &amp; connectors)</strong> je modulární služba, která propojuje <mark>Helios iNuvio</mark> s e-commerce světem. Umožňuje automatizovat přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery. Zrychluje procesy, minimalizuje ruční práci a šetří čas.</p>
+        <ul class="btn-row">
+          <li><a href="#kontakt" class="btn" role="button"><span>Získat nabídku</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="hero-image"><img src="/images/image01.png" alt="" width="1024" height="1024" onerror="this.closest('.hero-image').remove()"></div>
+      </div>
     </div>
   </div>
+</section>
 
-  <h2 class="section-title">Feedco BASIC</h2>
-  <p class="note"><em><span style="color:var(--mint)">Vyvážený balík pro každodenní provoz.</span> Automatizace běží na pozadí, vy šetříte čas i práci.</em></p>
-  <div class="tier-card">
-    <div>
-      <h3 class="kicker">E-shop</h3>
-      <ul class="ticks sm">
-        <li><p>Vše co tarif LITE</p></li>
-        <li><p>Automatická synchronizace každých 10 minut</p></li>
-        <li><p>Přenos produktů včetně cen a dostupností</p></li>
-        <li><p>Automatická fakturace objednávek</p></li>
-        <li><p>Notifikace při změně stavu objednávky</p></li>
-      </ul>
-      <p class="module-text">👉 Řešení pro běžný provoz – odpadá ruční práce, data se udržují aktuální a objednávky se zpracují samy.</p>
-      <p class="price">2 490 Kč / měsíc</p>
-      <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><svg aria-hidden="true"><use href="#arrow-right"></use></svg><span>Mám zájem</span></a></li></ul>
-    </div>
-    <div>
-      <h3 class="kicker">FEEDY</h3>
-      <ul class="ticks sm">
-        <li><p>Vše co tarif LITE</p></li>
-        <li><p>Napojení až 5 feedů, včetně customizace</p></li>
-        <li><p>Automatická synchronizace každých 10 minut</p></li>
-        <li><p>Pravidla pro generování vydaných objednávek</p></li>
-        <li><p>Automatické odesílání objednávek</p></li>
-      </ul>
-      <p class="module-text">👉 Praktický balíček pro firmy, které pracují s více dodavateli a chtějí hlídat sklad i objednávky.</p>
-      <p class="price">2 490 Kč / měsíc</p>
-      <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><svg aria-hidden="true"><use href="#arrow-right"></use></svg><span>Mám zájem</span></a></li></ul>
+<!-- ========================= BEZ / S FEEDCEM ======================== -->
+<section>
+  <div class="wrap">
+    <div class="cols">
+      <div class="stack">
+        <p class="section-title">Vaše data dnes <span class="muted">bez Feedca</span>...</p>
+        <ul class="ticks lg">
+          <li><p>Ruční párování dat a objednávek</p></li>
+          <li><p>Chyby v dostupnosti a cenách</p></li>
+          <li><p>Zaseklé nebo chybějící objednávky</p></li>
+          <li><p>Duplicitní práce mezi Heliosem a e-shopem</p></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <p class="section-title">s <span class="accent">Feedcem</span> to jde jinak...</p>
+        <ul class="ticks lg">
+          <li><p>Automatické toky dat mezi systémy</p></li>
+          <li><p>Validace a čištění dat před odesláním</p></li>
+          <li><p>Monitoring a notifikace při chybách</p></li>
+          <li><p>Jedno místo pro nastavení a kontrolu</p></li>
+        </ul>
+      </div>
     </div>
   </div>
+</section>
 
-  <h2 class="section-title">Feedco PROFI</h2>
-  <p class="note"><em><span style="color:var(--mint)">Plná kontrola a chytrá pravidla.</span> Řešení, které se přizpůsobí vašemu byznysu a zvládne i větší objemy.</em></p>
-  <div class="tier-card">
-    <div>
-      <h3 class="kicker">E-shop</h3>
-      <ul class="ticks sm">
-        <li><p>Vše co tarif BASIC</p></li>
-        <li><p>Propojení více e-shopů s Heliosem</p></li>
-        <li><p>Kompletní přenos produktů včetně parametrů</p></li>
-        <li><p>Alternativní a související produkty, varianty</p></li>
-        <li><p>Monitoring výpadků služby</p></li>
-        <li><p>Napojení na platební bránu</p></li>
-      </ul>
-      <p class="module-text">👉 Varianta pro e-shopy s vyšším objemem objednávek a potřebou kompletní správy produktů i plateb.</p>
-      <p class="price">4 490 Kč / měsíc</p>
-      <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><svg aria-hidden="true"><use href="#arrow-right"></use></svg><span>Mám zájem</span></a></li></ul>
+<!-- ============================= FUNKCE ============================= -->
+<section id="funkce">
+  <div class="wrap stack">
+    <h2 class="section-title">Co Feedco umí?</h2>
+    <p class="section-intro">Feedco pokrývá klíčové oblasti e-commerce provozu postaveného na Helios iNuvio. Každý z&nbsp;připravených modulů řeší konkrétní část datového a procesního toku mezi <mark>vašimi interními systémy, e-shopem a vašimi obchodními partnery</mark>. Služba je koncipována tak, aby mohla růst s vašimi aktuálními potřebami (obchodními, technickými) – od jednoduchého napojení jednoho e-shopu až po pokročilou vícezdrojovou automatizaci objednávek a dokladů.</p>
+
+    <div class="cols" style="margin-top:16px">
+      <div class="stack">
+        <h3 class="module-title">E-shop konektor</h3>
+        <p class="module-text">Tento modul slouží jako most mezi Heliosem a e-shopovou platformou klienta. Zajišťuje obousměrnou výměnu dat o objednávkách a expedici, čímž odstraňuje nutnost ručního přepisování údajů a snižuje chybovost. Nejčastěji napojujeme <a href="https://www.upgates.cz/">Upgates</a> a <a href="https://www.shoptet.cz/">Shoptet</a>. K dispozici máme také vlastní Feedco API.</p>
+      </div>
+      <div class="stack">
+        <h3 class="module-title">Feed konektor</h3>
+        <p class="module-text">Feed konektor zajišťuje import produktových dat od externích dodavatelů&nbsp;– typicky ve formě XML nebo CSV feedů. Modul umí data načítat, upravit podle pravidel klienta a zanést do Heliosu. Je ideální pro firmy, které spravují velké množství produktů od různých dodavatelů.</p>
+      </div>
     </div>
-    <div>
-      <h3 class="kicker">FEEDY</h3>
-      <ul class="ticks sm">
-        <li><p>Vše co tarif BASIC</p></li>
-        <li><p>Napojení až 20 feedů, včetně customizace</p></li>
-        <li><p>Výběr dodavatele podle ceny a dostupnosti</p></li>
-        <li><p>Podpora více dodavatelů zboží</p></li>
-        <li><p>Automatické generování vydaných objednávek</p></li>
-        <li><p>Kompletní podpora obchodního procesu</p></li>
-      </ul>
-      <p class="module-text">👉 Řešení pro firmy, které chtějí mít pod kontrolou ceny, dostupnost i objednávky.</p>
-      <p class="price">4 490 Kč / měsíc</p>
-      <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><svg aria-hidden="true"><use href="#arrow-right"></use></svg><span>Mám zájem</span></a></li></ul>
+
+    <div class="cols">
+      <div class="stack">
+        <h3 class="module-title">Vydané objednávky</h3>
+        <p class="module-text">Modul určený pro firmy, které pravidelně objednávají zboží od dodavatelů a chtějí tento proces zcela automatizovat. Systém sleduje aktuální zásoby, nově přijaté objednávky a na základě definovaných pravidel generuje a odesílá nákupní objednávky.</p>
+      </div>
+      <div class="stack">
+        <h3 class="module-title">Přijaté objednávky</h3>
+        <p class="module-text">Tento modul zajišťuje zpracování objednávek přijatých od koncových zákazníků – ať už z e-shopu nebo jiných kanálů. Automatizace šetří čas při rutinních úkonech a zajišťuje konzistentní zpracování všech objednávek. Modul obsahuje také automatické vystavování a odesílání faktur.</p>
+      </div>
+    </div>
+
+    <p class="note"><em>Jednotlivé moduly jsou rozděleny do tarifů podle svých funkcí a lze je spolu <span class="accent">libovolně kombinovat</span>.</em></p>
+    <p class="note">👉 <em>Pro jednoduchost jsme pro vás připravili hotové balíčky pokrývající nejčastější scénáře. Rádi vám připravíme <span class="accent">nabídku na míru přesně podle vašich potřeb</span>.</em></p>
+  </div>
+</section>
+
+<!-- ============================= TARIFY ============================= -->
+<section id="tarify">
+  <div class="wrap">
+    <div class="tier-head">
+      <h2 class="section-title">Feedco LITE</h2>
+      <p class="note"><em><span class="accent">Rychlý start pro menší firmy.</span> Jednoduché napojení bez složitostí. Stačí zapnout a funguje.</em></p>
+    </div>
+    <div class="tier-card">
+      <div>
+        <h3 class="col-label">E-shop</h3>
+        <ul class="ticks">
+          <li><p>Přenos objednávek z e-shopu do Heliosu</p></li>
+          <li><p>Automatická synchronizace jednou denně</p></li>
+          <li><p>Přenos stavů objednávky zpět na e-shop</p></li>
+        </ul>
+        <p class="module-text">👉 Hodí se pro firmy, které chtějí napojení vyzkoušet v&nbsp;základní podobě nebo mají malý objem objednávek.</p>
+        <p class="price">490 Kč / měsíc</p>
+        <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><span>Mám zájem</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li></ul>
+      </div>
+      <div>
+        <h3 class="col-label">FEEDY</h3>
+        <ul class="ticks">
+          <li><p>Napojení jednoho dodavatelského feedu</p></li>
+          <li><p>Automatická synchronizace jednou denně</p></li>
+          <li><p>V ceně customizace na strukturu feedu</p></li>
+        </ul>
+        <p class="module-text">👉 Vhodné pro start, když potřebujete mít v Heliosu základní data z jednoho feedu.</p>
+        <p class="price">490 Kč / měsíc</p>
+        <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><span>Mám zájem</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li></ul>
+      </div>
     </div>
   </div>
+</section>
 
-  <hr class="divider">
+<section>
+  <div class="wrap">
+    <div class="tier-head">
+      <h2 class="section-title">Feedco BASIC</h2>
+      <p class="note"><em><span class="accent">Vyvážený balík pro každodenní provoz.</span> Automatizace běží na pozadí, vy šetříte čas i práci.</em></p>
+    </div>
+    <div class="tier-card">
+      <div>
+        <h3 class="col-label">E-shop</h3>
+        <ul class="ticks">
+          <li><p>Vše co tarif LITE</p></li>
+          <li><p>Automatická synchronizace každých 10 minut</p></li>
+          <li><p>Přenos produktů včetně cen a dostupností</p></li>
+          <li><p>Automatická fakturace objednávek</p></li>
+          <li><p>Notifikace při změně stavu objednávky</p></li>
+        </ul>
+        <p class="module-text">👉 Řešení pro běžný provoz – odpadá ruční práce, data se udržují aktuální a objednávky se zpracují samy.</p>
+        <p class="price">2 490 Kč / měsíc</p>
+        <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><span>Mám zájem</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li></ul>
+      </div>
+      <div>
+        <h3 class="col-label">FEEDY</h3>
+        <ul class="ticks">
+          <li><p>Vše co tarif LITE</p></li>
+          <li><p>Napojení až 5 feedů, včetně customizace</p></li>
+          <li><p>Automatická synchronizace každých 10 minut</p></li>
+          <li><p>Pravidla pro generování vydaných objednávek</p></li>
+          <li><p>Automatické odesílání objednávek</p></li>
+        </ul>
+        <p class="module-text">👉 Praktický balíček pro firmy, které pracují s více dodavateli a chtějí hlídat sklad i objednávky.</p>
+        <p class="price">2 490 Kč / měsíc</p>
+        <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><span>Mám zájem</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li></ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- ========================== REFERENCE ========================= -->
-  <h3 class="section-title" id="reference">Ověřeno zákazníky</h3>
-  <p class="note"><em>Firmy, které <span style="color:var(--mint)">Feedco</span> denně využívají, se podělily o své zkušenosti.</em></p>
+<section>
+  <div class="wrap">
+    <div class="tier-head">
+      <h2 class="section-title">Feedco PROFI</h2>
+      <p class="note"><em><span class="accent">Plná kontrola a chytrá pravidla.</span> Řešení, které se přizpůsobí vašemu byznysu a zvládne i větší objemy.</em></p>
+    </div>
+    <div class="tier-card">
+      <div>
+        <h3 class="col-label">E-shop</h3>
+        <ul class="ticks">
+          <li><p>Vše co tarif BASIC</p></li>
+          <li><p>Propojení více e-shopů s Heliosem</p></li>
+          <li><p>Kompletní přenos produktů včetně parametrů</p></li>
+          <li><p>Alternativní a související produkty, varianty</p></li>
+          <li><p>Monitoring výpadků služby</p></li>
+          <li><p>Napojení na platební bránu</p></li>
+        </ul>
+        <p class="module-text">👉 Varianta pro e-shopy s vyšším objemem objednávek a potřebou kompletní správy produktů i plateb.</p>
+        <p class="price">4 490 Kč / měsíc</p>
+        <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><span>Mám zájem</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li></ul>
+      </div>
+      <div>
+        <h3 class="col-label">FEEDY</h3>
+        <ul class="ticks">
+          <li><p>Vše co tarif BASIC</p></li>
+          <li><p>Napojení až 20 feedů, včetně customizace</p></li>
+          <li><p>Výběr dodavatele podle ceny a dostupnosti</p></li>
+          <li><p>Podpora více dodavatelů zboží</p></li>
+          <li><p>Automatické generování vydaných objednávek</p></li>
+          <li><p>Kompletní podpora obchodního procesu</p></li>
+        </ul>
+        <p class="module-text">👉 Řešení pro firmy, které chtějí mít pod kontrolou ceny, dostupnost i objednávky.</p>
+        <p class="price">4 490 Kč / měsíc</p>
+        <ul class="btn-row"><li><a href="#kontakt" class="btn" role="button"><span>Mám zájem</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li></ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section class="cols testimonial">
-    <div><div class="avatar" data-initials="PA"><img src="/images/image05.jpg" alt="Petr Altman" onerror="this.remove()"></div></div>
-    <div><p class="quote"><em>Řešení přímého importu dat dodavatelů do Heliosu prostřednictvím služby Feedco nám ušetřilo hodně času při realizaci obchodních případů. Máme tak více času na zákazníky a můžeme se věnovat důležitějším úkolům než dohledávání zboží v datech nebo webech dodavatelů. Na řešení také oceňujeme, že jej lze napojit na jakýkoliv formát.</em><span class="author"><strong>Petr Altman, MBA</strong>, Jednatel, VERKON, s.r.o.</span></p></div>
-  </section>
+<!-- =========================== REFERENCE ============================ -->
+<section id="reference">
+  <div class="wrap stack">
+    <h3 class="section-title">Ověřeno zákazníky</h3>
+    <p class="note"><em>Firmy, které <span class="accent">Feedco</span> denně využívají, se podělily o své zkušenosti.</em></p>
 
-  <section class="cols testimonial">
-    <div><div class="avatar" data-initials="KB"><img src="/images/image04.jpg" alt="Karel Bartůněk" onerror="this.remove()"></div></div>
-    <div><p class="quote"><em>Automatizace vydaných objednávek nám výrazně zefektivnila práci. Manipulace s objednávkami, která dříve zabrala až 4 hodiny týdně, dnes trvá jen asi půl hodiny. To je obrovská úspora času – dnes si už práci s objednávkami bez Feedca ani neumíme představit.</em><span class="author"><strong>Ing. Karel Bartůněk</strong>, Stock Manager, Younger Optics Europe, s.r.o.</span></p></div>
-  </section>
+    <div style="margin-top:20px">
+      <div class="testimonial">
+        <div class="avatar" data-initials="PA"><img src="/images/image05.jpg" alt="Petr Altman" onerror="this.remove()"></div>
+        <p class="quote"><em>Řešení přímého importu dat dodavatelů do Heliosu prostřednictvím služby Feedco nám ušetřilo hodně času při realizaci obchodních případů. Máme tak více času na zákazníky a můžeme se věnovat důležitějším úkolům než dohledávání zboží v datech nebo webech dodavatelů. Na řešení také oceňujeme, že jej lze napojit na jakýkoliv formát.</em><span class="author"><strong>Petr Altman, MBA</strong>, Jednatel, VERKON, s.r.o.</span></p>
+      </div>
+      <div class="testimonial">
+        <div class="avatar" data-initials="KB"><img src="/images/image04.jpg" alt="Karel Bartůněk" onerror="this.remove()"></div>
+        <p class="quote"><em>Automatizace vydaných objednávek nám výrazně zefektivnila práci. Manipulace s objednávkami, která dříve zabrala až 4 hodiny týdně, dnes trvá jen asi půl hodiny. To je obrovská úspora času – dnes si už práci s objednávkami bez Feedca ani neumíme představit.</em><span class="author"><strong>Ing. Karel Bartůněk</strong>, Stock Manager, Younger Optics Europe, s.r.o.</span></p>
+      </div>
+      <div class="testimonial">
+        <div class="avatar" data-initials="JK"><img src="/images/image03.jpg" alt="Josef Kolník" onerror="this.remove()"></div>
+        <p class="quote"><em>Automatizace objednávek až po následné generování faktur včetně odeslání zákazníkům nám šetří čas a tím pádem i peníze. Celková komunikace s&nbsp;programátory Feedca je rychlá a vše bylo vyřízeno k naší spokojenosti.</em><span class="author"><strong>Ing. Josef Kolník</strong>, Sales Manager, MIRA MAR, s.r.o.</span></p>
+      </div>
+      <div class="testimonial">
+        <div class="avatar" data-initials="PP"><img src="/images/image02.jpg" alt="Petr Putík" onerror="this.remove()"></div>
+        <p class="quote"><em>Díky vytvořenému konektoru mezi naším E-shopem a firemním ERP systémem jsme schopni daleko rychleji zpracovávat zákaznické objednávky a eliminovat jak časovou náročnost administrativních úkonů, tak eliminovat možné lidské chyby v této agendě. Řešením konektoru na míru pomocí customizací jsme si jej navrhnuli přímo dle našich potřeb, aby byl v souladu se stávajícími vnitropodnikovými procesy.</em><span class="author"><strong>Ing. Petr Putík</strong>, Senior Manager, ZLKL, s.r.o.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section class="cols testimonial">
-    <div><div class="avatar" data-initials="JK"><img src="/images/image03.jpg" alt="Josef Kolník" onerror="this.remove()"></div></div>
-    <div><p class="quote"><em>Automatizace objednávek až po následné generování faktur včetně odeslání zákazníkům nám šetří čas a tím pádem i peníze. Celková komunikace s&nbsp;programátory Feedca je rychlá a vše bylo vyřízeno k naší spokojenosti.</em><span class="author"><strong>Ing. Josef Kolník</strong>, Sales Manager, MIRA MAR, s.r.o.</span></p></div>
-  </section>
+<!-- ============================ KONTAKT ============================= -->
+<section id="kontakt">
+  <div class="wrap stack">
+    <h3 class="section-title">Máte zájem? Napište nám...</h3>
+    <p class="note"><em>Do zprávy prosím uveďte, o jaký balíček máte zájem nebo jestli si přejete <span class="accent">nabídku na míru</span>.</em></p>
 
-  <section class="cols testimonial">
-    <div><div class="avatar" data-initials="PP"><img src="/images/image02.jpg" alt="Petr Putík" onerror="this.remove()"></div></div>
-    <div><p class="quote"><em>Díky vytvořenému konektoru mezi naším E-shopem a firemním ERP systémem jsme schopni daleko rychleji zpracovávat zákaznické objednávky a eliminovat jak časovou náročnost administrativních úkonů, tak eliminovat možné lidské chyby v této agendě. Řešením konektoru na míru pomocí customizací jsme si jej navrhnuli přímo dle našich potřeb, aby byl v souladu se stávajícími vnitropodnikovými procesy.</em><span class="author"><strong>Ing. Petr Putík</strong>, Senior Manager, ZLKL, s.r.o.</span></p></div>
-  </section>
+    <form class="contact-form" action="https://formspree.io/f/xkgnqpnz" method="POST" style="margin-top:20px">
+      <input type="hidden" name="_subject" value="Feedco — poptávka z webu">
+      <div><input type="text" name="name" placeholder="Jméno / Název firmy" maxlength="128" required></div>
+      <div><input type="email" name="email" placeholder="E-mail" maxlength="128" required></div>
+      <div><input type="tel" name="phone" placeholder="Telefonní číslo (nepovinné)" pattern="[0-9\-\(\)+ #*]+" minlength="7" maxlength="28"></div>
+      <div><input type="text" name="mail" placeholder="Mail" maxlength="128" tabindex="-1" autocomplete="off"></div>
+      <div><textarea name="message" placeholder="Zpráva" maxlength="16384" required></textarea></div>
+      <div><button type="submit">Odeslat</button></div>
+    </form>
 
-  <hr class="divider">
-
-  <!-- =========================== KONTAKT ========================== -->
-  <h3 class="section-title" id="kontakt">Máte zájem? Napište nám...</h3>
-  <p class="note"><em>Do zprávy prosím uveďte, o jaký balíček máte zájem nebo jestli si přejete <span style="color:var(--mint)">nabídku na míru</span>.</em></p>
-
-  <form class="contact-form" action="https://formspree.io/f/xkgnqpnz" method="POST">
-    <input type="hidden" name="_subject" value="Feedco — poptávka z webu">
-    <div><input type="text" name="name" placeholder="Jméno / Název firmy" maxlength="128" required></div>
-    <div><input type="email" name="email" placeholder="E-mail" maxlength="128" required></div>
-    <div><input type="tel" name="phone" placeholder="Telefonní číslo (nepovinné)" pattern="[0-9\-\(\)+ #*]+" minlength="7" maxlength="28"></div>
-    <div><input type="text" name="mail" placeholder="Mail" maxlength="128" tabindex="-1" autocomplete="off"></div>
-    <div><textarea name="message" placeholder="Zpráva" maxlength="16384" required></textarea></div>
-    <div><button type="submit">Odeslat</button></div>
-  </form>
-
-  <h3 class="section-title">Chcete probrat raději telefonicky?</h3>
-  <p class="note"><em>Volejte <a href="tel:+420774267301" style="color:var(--mint)">+420 774 267 301</a>.</em></p>
-
-  <hr class="divider">
-
-</main>
+    <h3 class="section-title" style="margin-top:48px">Chcete probrat raději telefonicky?</h3>
+    <p class="note"><em>Volejte <a href="tel:+420774267301">+420 774 267 301</a>.</em></p>
+  </div>
+</section>
 
 <footer>
-  <div class="inner">
-    <div class="cols testimonial">
-      <div><div class="avatar plain"><img src="/images/image06.jpg" alt="" onerror="this.remove()"></div></div>
-      <div><p class="body-text">©2025-2026 Feedco. All rights reserved.<br>
-        Mgr. Jakub Ševela, Lidická 700/19, 602 00 Brno<br>
-        IČ: 75185628, DIČ: CZ8503274703 (jsem plátce DPH)</p></div>
-    </div>
+  <div class="wrap inner">
+    <div class="avatar" style="background:transparent; border-color:var(--border)"><img src="/images/image06.jpg" alt="" onerror="this.remove()"></div>
+    <p class="body-text">©2025-2026 Feedco. All rights reserved.<br>
+      Mgr. Jakub Ševela, Lidická 700/19, 602 00 Brno<br>
+      IČ: 75185628, DIČ: CZ8503274703 (jsem plátce DPH)</p>
   </div>
 </footer>
-</div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK1160VT0P"></script>
 <script>

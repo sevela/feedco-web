@@ -7,20 +7,20 @@ prolinkovaný s [jakubsevela.cz](https://jakubsevela.cz), nikoli pod ním.
 
 ## Stav
 
-Web odchází z Carrdu. `index.html` je **replika původní Carrd stránky** — tmavý design
-(`#171A1C`), mintový akcent `#00FFC2`, Inter, pilulková tlačítka. Neodpovídá brand systému
-(jantar/limetka, Lora + DM Sans, tónované buttony). Je tu proto, aby přechod na Pages
-nezměnil nic navenek. Redesign do brandu přijde jako druhý krok.
+Web odešel z Carrdu na GitHub Pages a **je přestylovaný podle grafického manuálu v1.1**
+(26. 7. 2026) — dark-first paleta, limetkový akcent, Lora + DM Sans + DM Mono, tónovaná
+tlačítka, radius 8/12. Tokeny se berou z `/brand/tokens.css`, žádné hexy natvrdo.
 
-Markup je přepsaný do sémantického HTML, ne kopie Carrd soup. Vizuální hodnoty
-(barvy, velikosti, rádiusy, pozadí, oddělovače) odpovídají originálu 1:1.
+**Texty jsou pořád ty z původní Carrd stránky**, změnil se jen vizuál. Jediná změna
+textu je wordmark: `FEEDCO` → `feedco.` podle pravidla z manuálu. Obsahová revize
+(strukura, argumentace, ceny) je samostatný krok, který ještě nenastal.
 
-Pořadí dotahování webů je hub → feedco → ethel. Feedco je tedy druhé v řadě.
+Pořadí dotahování webů je hub → feedco → ethel.
 
-## Vizuální systém (pro redesign, ne pro současnou repliku)
+## Vizuální systém
 
 Tokeny jsou v **`/brand/tokens.css`**, kompletní manuál na `/brand/`.
-Nikdy nepiš hexy natvrdo.
+Nikdy nepiš hexy natvrdo — `index.html` už je na tokenech postavený.
 
 - **Dark-first.** Pozadí `--bg` / `--bg-alt`, karty `--card`.
 - **Accent = limetková `#9ed455`.** Barva jen v akcentech (tečka, CTA, odkazy, ikony stavu),
@@ -64,7 +64,16 @@ Disclaimer „není produktem Asseco Solutions" na produktovém webu zůstává.
 
 ## Známý technický dluh
 
-- Současný `index.html` je replika Carrdu, mimo brand systém — čeká na redesign.
+- **Hero obrázek `images/image01.png` je mimo paletu** — tyrkysovo-mintová grafika
+  s oranžovými čárami z Carrdu. Je to nejnápadnější prvek stránky a bije se s limetkovou.
+  Potřebuje překreslit do brandu, nebo vypustit.
+- Barva `#ff9999` z originálu (u „bez Feedca") v paletě není. Nahrazena `--text-3`, takže
+  kontrast mezi „bez Feedca" (utlumené) a „s Feedcem" (akcent) drží bez cizí barvy.
+- Vypuštěno z Carrdu jako neslučitelné s manuálem: mintový geometrický podklad na celé
+  stránce (barva jako plocha), šachovnicový vzor v kartách, vlnkové oddělovače,
+  pilulková tlačítka s 3px borderem.
+- Navigace je teď sticky (v Carrdu nebyla) — stejně jako na hubu.
+- Texty čekají na obsahovou revizi; zatím jsou to Carrd verze.
 - Kontaktní formulář: Carrd ho obsluhoval na svojí straně (AJAX na `/post/contact`).
   V replice je nahrazený Formspree, protože Pages nic serverového neumí. **Používá zatím
   stejný endpoint jako hub (`xkgnqpnz`)** — odlišen jen skrytým polem `_subject`.
