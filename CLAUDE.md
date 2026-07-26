@@ -42,9 +42,15 @@ kontaktní blok (e-mail na dané doméně, +420 774 267 301, LinkedIn) a právn�
 (Mgr. Jakub Ševela, Lidická 700/19, 602 00 Brno, IČ, DIČ) jsou stejné.
 Když patičku měníš, propiš to do `jakubsevela-web` a `ethel-web`.
 
-Label u prolinků se liší podle role webu: na produktových webech (feedco.cz, ethel.cz)
-je **„Od stejného autora"**, na hubu jakubsevela.cz bude **„Produkty"**. Nepoužívat
-generické „Další weby" — neříká, co ty weby spojuje.
+**Prolinky nemají zastřešující nadpis.** Osobní web a produktový web nepatří pod jednu
+hlavičku, protože k Feedcu mají různý vztah — proto každý odkaz nese vlastní jednořádkový
+popis, co to je. Zkoušeli jsme „Další weby" (mdlé) i „Od stejného autora" (spojuje
+nespojitelné) a obojí zahodili. Odkazy odděluje vlasová linka vlevo, která na hover
+zezelená.
+
+**Newsletter v patičce zatím není.** Podle roadmapy nemá platformu ani frekvenci a hub
+kvůli tomu záměrně nemá signup. Odkaz na neexistující odběr je horší než žádný. Až
+newsletter vznikne, přidat sem i na ostatní dva weby.
 
 Kontaktní e-mail se řídí doménou webu: `kontakt@feedco.cz` zde, na ethel.cz `info@ethel.cz`.
 Telefon a LinkedIn jsou společné.

@@ -248,11 +248,30 @@ em { font-style: italic; }
 
 /* --- patička ------------------------------------------------------------- */
 /* --- sdílená patička ----------------------------------------------------- */
-footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: var(--bg-alt); }
-.ft-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; align-items: start; }
-@media (max-width: 820px) { .ft-top { grid-template-columns: 1fr 1fr; } .ft-top > :first-child { grid-column: 1 / -1; } }
-@media (max-width: 520px) { .ft-top { grid-template-columns: 1fr; gap: 28px; } }
-.ft-tagline { margin-top: 12px; font-size: 14.5px; color: var(--text-2); max-width: 34ch; }
+footer { padding: 64px 0 64px; border-top: 1px solid var(--border); background: var(--bg-alt); }
+.ft-top { display: grid; grid-template-columns: 1.3fr 1.15fr 0.75fr; gap: 48px; align-items: start; }
+@media (max-width: 900px) { .ft-top { grid-template-columns: 1fr 1fr; gap: 40px; } .ft-brand { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .ft-top { grid-template-columns: 1fr; gap: 36px; } }
+
+.ft-brand .wordmark-ft { display: inline-block; }
+.ft-tagline { margin-top: 14px; font-size: 14.5px; line-height: 1.65; color: var(--text-2); max-width: 44ch; }
+
+/* každý odkaz nese vlastní popis, takže nepotřebuje zastřešující nadpis */
+.ft-sites { display: flex; flex-direction: column; gap: 4px; }
+.ft-sites a {
+  display: block; text-decoration: none;
+  padding: 8px 0 8px 14px;
+  border-left: 1px solid var(--border);
+  transition: border-color 0.15s;
+}
+.ft-sites a:hover { border-left-color: var(--accent); }
+.ft-site {
+  display: block; font-size: 15px; color: var(--text);
+  transition: color 0.15s;
+}
+.ft-sites a:hover .ft-site { color: var(--accent-l); }
+.ft-desc { display: block; margin-top: 2px; font-size: 14px; line-height: 1.5; color: var(--text-2); }
+
 .ft-links { display: flex; flex-direction: column; gap: 8px; }
 .ft-label {
   font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.08em;
@@ -263,10 +282,11 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
   transition: color 0.15s; width: fit-content;
 }
 .ft-links a:hover { color: var(--accent-l); text-decoration: underline; text-underline-offset: 3px; }
-.ft-legal { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+
+.ft-legal { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
 .ft-legal p { font-size: 14px; color: var(--text-2); }
 .ft-legal p + p { margin-top: 6px; }
-.ft-copy { margin-top: 12px !important; }
+.ft-copy { margin-top: 12px !important; color: var(--text-3) !important; }
 </style>
 </head>
 <body>
@@ -533,15 +553,26 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
 <footer>
   <div class="wrap">
     <div class="ft-top">
-      <div>
+      <div class="ft-brand">
         <a class="wordmark-ft" href="#home">feedco<span class="dot">.</span></a>
-        <p class="ft-tagline">E-commerce konektor pro Helios iNuvio.</p>
+        <p class="ft-tagline">Modulární konektor mezi Helios iNuvio a e-commerce. Nejčastěji napojuje e-shopy na Upgates a Shoptetu, načítá dodavatelské feedy v XML nebo CSV a automatizuje vydané i přijaté objednávky včetně fakturace.</p>
       </div>
-      <nav class="ft-links" aria-label="Od stejného autora">
-        <span class="ft-label">Od stejného autora</span>
-        <a href="https://jakubsevela.cz">jakubsevela.cz</a>
-        <a href="https://ethel.cz">ethel.cz</a>
+
+      <nav class="ft-sites" aria-label="Související weby">
+        <a href="https://jakubsevela.cz">
+          <span class="ft-site">jakubsevela.cz</span>
+          <span class="ft-desc">Autor Feedca. Helios iNuvio, integrace a zakázkový vývoj.</span>
+        </a>
+        <a href="https://ethel.cz">
+          <span class="ft-site">ethel.cz</span>
+          <span class="ft-desc">AI asistentka pro Helios iNuvio. Zeptáte se místo proklikávání.</span>
+        </a>
+        <a href="https://docs.feedco.cz">
+          <span class="ft-site">docs.feedco.cz</span>
+          <span class="ft-desc">Dokumentace Feedco API.</span>
+        </a>
       </nav>
+
       <nav class="ft-links" aria-label="Kontakt">
         <span class="ft-label">Kontakt</span>
         <a href="mailto:kontakt@feedco.cz">kontakt@feedco.cz</a>
@@ -550,6 +581,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
         <a href="https://linkedin.com/in/sevela" rel="me noopener">LinkedIn</a>
       </nav>
     </div>
+
     <div class="ft-legal">
       <p>Mgr. Jakub Ševela &middot; Lidická 700/19, 602 00 Brno &middot; IČ: 75185628 &middot; DIČ: CZ8503274703</p>
       <p>Feedco není produkt společnosti Asseco Solutions.</p>
