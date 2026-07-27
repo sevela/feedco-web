@@ -103,7 +103,7 @@ tady se řeší jen jejich podání.
 ## Texty
 
 Česky, vykaná forma. Konkrétnost před přísliby — jména klientů, čísla, měřitelné výsledky.
-Reference na webu: VERKON, Younger Optics Europe, MIRA MAR, ZLKL.
+Reference na webu: VERKON, Younger Optics Europe, MIRA MAR, ZLKL, ŠIMEK proficentrum.
 Disclaimer „není produktem Asseco Solutions" na produktovém webu zůstává.
 
 ## Co nedělat
@@ -142,8 +142,9 @@ Disclaimer „není produktem Asseco Solutions" na produktovém webu zůstává.
   až za GA4 snippet a navázat na odeslání formuláře, ne na načtení stránky.
 - Chybí `og-image.jpg` (meta tagy na něj odkazují). Favicony už jsou (monogram `f.`,
   26. 7.); generátor og-image má `jakubsevela-web` v `scripts/generate-og.js`.
-- Fotky referencí (`image02`–`05.jpg`) se stahují z Carrdu ručně. Když fotka chybí,
-  `onerror` ji nahradí iniciálami.
+- Fotky referencí (`image02`–`07.jpg`) se stahují z Carrdu ručně, `image07.jpg` (Zdeněk
+  Kolář, ŠIMEK proficentrum) dodal Jakub přímo. Když fotka chybí, `onerror` ji nahradí
+  iniciálami.
 - ~~Kalkulačka žije mimo repo a čeká na rozhodnutí.~~ **Vyřešeno 27. 7. 2026** —
   kalkulačka je veřejně na webu v sekci `#tarify` a nahradila statické price-cards.
   Komponenta price-card z manuálu zůstává pro ethel.cz.
