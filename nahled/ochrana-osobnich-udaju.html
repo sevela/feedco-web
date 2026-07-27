@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ochrana osobních údajů – Feedco</title>
+<meta name="description" content="Zásady zpracování osobních údajů na webu feedco.cz.">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="Jakub Ševela">
+
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/brand/dm-sans-latin-ext-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/brand/lora-latin-ext-400-normal.woff2" crossorigin>
+<link rel="stylesheet" href="/brand/fonts.css">
+<link rel="stylesheet" href="/brand/tokens.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--content-max); margin: 0 auto; padding: 0 32px; }
+@media (max-width: 640px) { .wrap { padding: 0 20px; } }
+
+/* --- navigace (shodná s hlavní stránkou) --------------------------------- */
+.topnav {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(10, 10, 12, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topnav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 16px; padding-bottom: 16px; }
+.topnav ul { list-style: none; display: flex; gap: 24px; }
+.topnav ul a {
+  font-family: var(--font-mono);
+  font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-2); text-decoration: none; white-space: nowrap;
+  transition: color 0.15s;
+}
+.topnav ul a:hover { color: var(--text); }
+.wordmark-sm, .wordmark-ft {
+  font-family: var(--font-wordmark);
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: var(--text);
+  line-height: 1;
+}
+.wordmark-sm { font-size: 26px; }
+.wordmark-ft { font-size: 22px; }
+.wordmark-sm .dot, .wordmark-ft .dot {
+  color: var(--accent); font-weight: 700; font-size: 1.25em; line-height: 1;
+}
+.wordmark-sm:hover .dot { color: var(--accent-l); }
+
+/* --- obsah stránky -------------------------------------------------------- */
+main { padding: 72px 0 88px; }
+.legal { max-width: 760px; }
+.legal h1 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: 34px; line-height: 1.2;
+}
+.legal .updated {
+  font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-3); margin-top: 12px;
+}
+.legal h2 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-heading);
+  font-size: 21px; line-height: 1.3;
+  margin-top: 44px;
+}
+.legal p { color: var(--text-2); font-size: 15.5px; margin-top: 14px; }
+.legal p strong { color: var(--text); font-weight: 500; }
+.legal ul { list-style: none; margin-top: 14px; }
+.legal ul li { display: flex; gap: 10px; color: var(--text-2); font-size: 15.5px; line-height: 1.7; }
+.legal ul li + li { margin-top: 6px; }
+.legal ul li::before {
+  content: '+';
+  font-family: var(--font-mono);
+  color: var(--accent-l);
+  flex: 0 0 auto;
+  line-height: 1.7;
+}
+.legal a {
+  color: var(--accent-l);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.legal a:hover { text-decoration-thickness: 2px; }
+
+/* --- patička (zkrácená, styl sdílené patičky) ----------------------------- */
+footer { padding: 40px 0 48px; border-top: 1px solid var(--border); background: var(--bg-alt); }
+.ft-legal p { font-size: 14px; color: var(--text-2); }
+.ft-legal p + p { margin-top: 6px; }
+.ft-copy { margin-top: 12px !important; color: var(--text-3) !important; }
+.ft-legal a { color: var(--accent-l); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap">
+    <a class="wordmark-sm" href="/nahled/" aria-label="feedco.cz">feedco<span class="dot">.</span></a>
+    <ul>
+      <li><a href="/nahled/">Zpět na web</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <article class="legal">
+      <h1>Ochrana osobních údajů</h1>
+      <p class="updated">Platné od 27. 7. 2026</p>
+
+      <h2>Kdo údaje zpracovává</h2>
+      <p>Správcem osobních údajů je <strong>Mgr. Jakub Ševela</strong>, Lidická 700/19, 602 00 Brno, IČ 75185628, provozovatel služby Feedco a webu feedco.cz. Napsat mi můžete na <a href="mailto:kontakt@feedco.cz">kontakt@feedco.cz</a>.</p>
+
+      <h2>Kontaktní formulář</h2>
+      <p>Když odešlete poptávku přes formulář, zpracovávám jméno nebo název firmy, e-mail, telefon (pokud ho vyplníte) a text zprávy. Údaje používám jen k odpovědi na poptávku a navazující komunikaci o nabídce; právním základem je jednání o uzavření smlouvy.</p>
+      <p>Poptávky ukládám v databázi u poskytovatele Supabase a e-mailová upozornění odesílá služba Resend. Údaje uchovávám po dobu jednání o poptávce a přiměřenou dobu poté, nejdéle tři roky od poslední komunikace, pak je mažu.</p>
+
+      <h2>Měření návštěvnosti</h2>
+      <p>Web používá Google Analytics 4, ale jen pokud to v cookie liště povolíte. Bez souhlasu se měřicí skript vůbec nenačte a žádné analytické cookies se neukládají. Souhlas můžete kdykoliv odvolat smazáním cookies pro feedco.cz v prohlížeči; lišta se pak zobrazí znovu.</p>
+
+      <h2>Kde web běží</h2>
+      <p>Web hostuje GitHub Pages (GitHub, Inc.), který může v provozních záznamech krátkodobě zpracovávat IP adresy návštěvníků, jak je u webhostingu běžné.</p>
+
+      <h2>Co s údaji nedělám</h2>
+      <p>Údaje nikomu neprodávám, nepředávám je nikomu dalšímu než uvedeným poskytovatelům technického zázemí a nepoužívám je k marketingu bez vašeho vědomí.</p>
+
+      <h2>Vaše práva</h2>
+      <ul>
+        <li>požádat o přístup k údajům, které o vás mám, a o jejich kopii</li>
+        <li>požádat o opravu nebo výmaz</li>
+        <li>vznést námitku proti zpracování nebo požádat o jeho omezení</li>
+        <li>podat stížnost u Úřadu pro ochranu osobních údajů</li>
+      </ul>
+      <p>Se vším se stačí ozvat na <a href="mailto:kontakt@feedco.cz">kontakt@feedco.cz</a>, odpovídám do dvou pracovních dnů.</p>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="ft-legal">
+      <p>Mgr. Jakub Ševela &middot; Lidická 700/19, 602 00 Brno &middot; IČ: 75185628 &middot; DIČ: CZ8503274703</p>
+      <p>Feedco není produkt společnosti Asseco Solutions.</p>
+      <p class="ft-copy">&copy; 2025&ndash;2026 Feedco</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
