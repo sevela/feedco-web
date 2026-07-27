@@ -215,38 +215,113 @@ em { font-style: italic; }
 .btn.ghost { background: transparent; border-color: var(--border-2); color: var(--text); }
 .btn.ghost:hover { background: transparent; border-color: rgba(255, 255, 255, 0.25); }
 
-/* --- tarify: price-card z manuálu v1.6, modulární varianta ---------------
-   Kartu nese tarif, moduly jsou skupiny uvnitř. Cena platí za modul
-   a stojí u něj. CTA vždy u dna karty. */
-.price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.price-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  padding: 28px;
-  display: flex; flex-direction: column;
+/* --- ceník: kalkulačka sestavy -------------------------------------------
+   Nahrazuje statické price-cards (Carrd ceny) — ceny teď nese modulární
+   model: modul × tarif + rozsah, sleva za kombinaci, jednorázové nasazení.
+   Stavba drží price-card komponentu manuálu v1.6: název tarifu v DM Mono
+   uppercase, cena v Lora (čím větší, tím lehčí), výčet s mono plusem,
+   tónovaná CTA. Vybraný tarif nese accent border — žádné plné barevné
+   plochy, žádná inverzní karta. */
+.calc-layout { display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start; }
+@media (max-width: 960px) { .calc-layout { grid-template-columns: 1fr; } }
+
+.cmod {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 24px;
+  transition: border-color 0.15s;
 }
-.pc-tier {
+.cmod + .cmod { margin-top: 16px; }
+.cmod.on { border-color: var(--accent-border); }
+.cmod-head { display: flex; align-items: flex-start; gap: 14px; cursor: pointer; }
+.cmod-head input[type="checkbox"] {
+  width: 20px; height: 20px; margin-top: 4px; flex: 0 0 auto;
+  accent-color: var(--accent); cursor: pointer;
+}
+.cmod-desc { margin-top: 4px; }
+.cmod-body { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+.cmod.on .cmod-body { display: block; }
+
+.ctiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.ctiers.single { grid-template-columns: 1fr; }
+@media (max-width: 620px) { .ctiers { grid-template-columns: 1fr; } }
+.ctier {
+  background: var(--bg-alt); border: 1px solid var(--border-2);
+  border-radius: var(--radius-btn); padding: 14px; cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.ctier:hover { border-color: rgba(255, 255, 255, 0.25); }
+.ctier.sel { border-color: var(--accent-border-hover); box-shadow: 0 0 0 1px var(--accent-border); }
+.ctiers.single .ctier { cursor: default; }
+.ct-name {
+  font-family: var(--font-mono); font-size: 11.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2);
+}
+.ctier.sel .ct-name { color: var(--accent-l); }
+.ct-price {
+  font-family: var(--font-display); font-weight: var(--weight-display);
+  font-size: 19px; line-height: 1.3; margin: 6px 0 10px; color: var(--text);
+}
+.ct-price span { font-family: var(--font-body); font-size: 12.5px; color: var(--text-3); }
+.ctier ul { list-style: none; }
+.ctier ul li { display: flex; gap: 8px; font-size: 13px; line-height: 1.55; color: var(--text-2); }
+.ctier ul li + li { margin-top: 4px; }
+.ctier ul li::before { content: '+'; font-family: var(--font-mono); color: var(--accent-l); flex: 0 0 auto; line-height: 1.55; }
+
+.cparam {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  margin-top: 14px; background: var(--bg-alt);
+  border: 1px solid var(--border); border-radius: var(--radius-btn); padding: 12px 16px;
+}
+.cparam label { font-size: 14.5px; color: var(--text); }
+.cparam .hint { display: block; font-size: 13px; color: var(--text-3); }
+.stepper { display: inline-flex; align-items: stretch; border: 1px solid var(--border-2); border-radius: var(--radius-btn); overflow: hidden; }
+.stepper button {
+  width: 36px; height: 36px; border: 0; cursor: pointer;
+  background: transparent; color: var(--text); font-size: 17px; line-height: 1;
+  font-family: var(--font-body);
+  transition: background 0.15s, color 0.15s;
+}
+.stepper button:hover:not(:disabled) { background: var(--accent-tint); color: var(--accent-l); }
+.stepper button:disabled { color: var(--text-3); cursor: default; }
+.stepper input {
+  width: 48px; border: 0; border-left: 1px solid var(--border-2); border-right: 1px solid var(--border-2);
+  background: transparent; color: var(--text); text-align: center;
+  font-family: var(--font-body); font-size: 15px; font-weight: 500;
+  -moz-appearance: textfield; outline: 0;
+}
+.stepper input:disabled { color: var(--text-3); }
+.stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.csum {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 26px;
+  position: sticky; top: 84px; /* pod sticky navigací (65 px) */
+}
+@media (max-width: 960px) { .csum { position: static; } }
+.csum h3 {
   font-family: var(--font-mono); font-size: 12.5px; font-weight: 500;
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-l);
+  margin-bottom: 18px;
 }
-.pc-sub { font-size: 14.5px; line-height: 1.6; color: var(--text-2); margin-top: 8px; }
-.pc-div { border: 0; border-top: 1px solid var(--border); margin: 20px 0 18px; }
-.pc-module {
-  font-family: var(--font-mono); font-size: 11.5px; font-weight: 500;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3);
+.cs-line { display: flex; justify-content: space-between; gap: 12px; font-size: 14.5px; line-height: 1.5; }
+.cs-line + .cs-line { margin-top: 10px; }
+.cs-line .l { color: var(--text-2); min-width: 0; }
+.cs-line .r { color: var(--text); white-space: nowrap; }
+.cs-line .sub { display: block; font-size: 13px; color: var(--text-3); }
+.cs-line.disc .r { color: var(--accent-l); }
+.cs-total { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-top: 1px solid var(--border); margin-top: 18px; padding-top: 16px; }
+.cs-total .label { font-size: 14.5px; font-weight: 500; }
+.cs-total .val {
+  font-family: var(--font-display); font-weight: var(--weight-display);
+  font-size: 30px; line-height: 1.15; letter-spacing: -0.01em; white-space: nowrap;
 }
-.pc-price {
-  font-family: var(--font-display); font-weight: var(--weight-heading);
-  font-size: 22px; line-height: 1.3; margin: 8px 0 12px;
-}
-.pc-price span { font-family: var(--font-body); font-weight: 400; font-size: 13px; color: var(--text-3); }
-.price-card .ticks li { font-size: 14.5px; }
-.price-card .module-text { font-size: 14.5px; margin-top: 12px; }
-.pc-cta { margin-top: auto; padding-top: 26px; }
-.pc-cta .btn { width: 100%; justify-content: center; }
-.tier-head { margin-bottom: 28px; }
-.tier-head > * + * { margin-top: 10px; }
+.cs-total .val small { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--text-3); }
+.cs-impl { display: flex; justify-content: space-between; gap: 12px; font-size: 14.5px; margin-top: 12px; }
+.cs-impl .l { color: var(--text-2); }
+.cs-impl .r { color: var(--text); white-space: nowrap; }
+.cs-note { font-size: 13px; line-height: 1.6; color: var(--text-3); margin-top: 14px; }
+.cs-empty { font-size: 14.5px; line-height: 1.7; color: var(--text-2); }
+.csum .btn { width: 100%; justify-content: center; margin-top: 18px; }
 
 /* --- odrážky: plus v mono, akcent ---------------------------------------- */
 .ticks { list-style: none; }
@@ -496,7 +571,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
     <ul>
       <li><a href="#home">Domů</a></li>
       <li><a href="#funkce">Funkce</a></li>
-      <li><a href="#tarify">Tarify</a></li>
+      <li><a href="#tarify">Ceník</a></li>
       <li><a href="#reference">Reference</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
     </ul>
@@ -560,7 +635,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
         <p class="body-text"><strong>Feedco</strong> automatizuje přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery. Synchronizuje objednávky, produkty, sklady i&nbsp;ceny, eliminuje ruční přepisování dat a zjednodušuje každodenní provoz.</p>
         <ul class="btn-row">
           <li><a href="#kontakt" class="btn" role="button"><span>Získat nabídku</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></li>
-          <li><a href="#tarify" class="btn ghost" role="button"><span>Tarify</span></a></li>
+          <li><a href="#tarify" class="btn ghost" role="button"><span>Ceník</span></a></li>
         </ul>
   </div>
 </section>
@@ -620,116 +695,26 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
     </div>
 
     <p class="note"><em>Jednotlivé moduly jsou rozděleny do tarifů podle svých funkcí a lze je spolu <span class="accent">libovolně kombinovat</span>.</em></p>
-    <p class="note">👉 <em>Pro jednoduchost jsme pro vás připravili hotové balíčky pokrývající nejčastější scénáře. Rádi vám připravíme <span class="accent">nabídku na míru přesně podle vašich potřeb</span>.</em></p>
+    <p class="note">👉 <em>Cenu si spočítáte v <a href="#tarify">kalkulačce níže</a> – vyberete moduly a rozsah, cena se počítá průběžně. Rádi vám připravíme <span class="accent">nabídku na míru přesně podle vašich potřeb</span>.</em></p>
   </div>
 </section>
 
-<!-- ============================= TARIFY ============================= -->
+<!-- ====================== CENÍK — KALKULAČKA ======================== -->
+<!-- Nahrazuje statické tarify z Carrdu (LITE/BASIC/PROFI). Ceny nese
+     modulární model: modul × tarif + rozsah, sleva za kombinaci,
+     jednorázové nasazení. Data a přepočty jsou ve skriptu na konci
+     stránky (const MODULES). CTA předvyplní sestavu do kontaktního
+     formuláře — lead jde přes web-lead do DB, ne přes mailto. -->
 <section id="tarify">
-  <div class="wrap">
-    <div class="tier-head">
-      <h2 class="section-title">Tarify</h2>
-    </div>
-    <div class="price-grid">
-
-      <div class="price-card">
-        <div class="pc-tier">Feedco LITE</div>
-        <p class="pc-sub">Rychlý start pro menší firmy. Jednoduché napojení bez složitostí. Stačí zapnout a funguje.</p>
-        <hr class="pc-div">
-        <div class="pc-group">
-          <h3 class="pc-module">E-shop</h3>
-          <p class="pc-price">490 Kč <span>/ měsíc</span></p>
-          <ul class="ticks">
-            <li><p>Přenos objednávek z e-shopu do Heliosu</p></li>
-            <li><p>Automatická synchronizace jednou denně</p></li>
-            <li><p>Přenos stavů objednávky zpět na e-shop</p></li>
-          </ul>
-          <p class="module-text">👉 Hodí se pro firmy, které chtějí napojení vyzkoušet v&nbsp;základní podobě nebo mají malý objem objednávek.</p>
-        </div>
-        <hr class="pc-div">
-        <div class="pc-group">
-          <h3 class="pc-module">Feedy</h3>
-          <p class="pc-price">490 Kč <span>/ měsíc</span></p>
-          <ul class="ticks">
-            <li><p>Napojení jednoho dodavatelského feedu</p></li>
-            <li><p>Automatická synchronizace jednou denně</p></li>
-            <li><p>V ceně customizace na strukturu feedu</p></li>
-          </ul>
-          <p class="module-text">👉 Vhodné pro start, když potřebujete mít v Heliosu základní data z jednoho feedu.</p>
-        </div>
-        <div class="pc-cta"><a href="#kontakt" class="btn" role="button"><span>Mám zájem</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></div>
-      </div>
-
-      <div class="price-card">
-        <div class="pc-tier">Feedco BASIC</div>
-        <p class="pc-sub">Vyvážený balík pro každodenní provoz. Automatizace běží na pozadí, vy šetříte čas i práci.</p>
-        <hr class="pc-div">
-        <div class="pc-group">
-          <h3 class="pc-module">E-shop</h3>
-          <p class="pc-price">2 490 Kč <span>/ měsíc</span></p>
-          <ul class="ticks">
-            <li><p>Vše co tarif LITE</p></li>
-            <li><p>Automatická synchronizace každých 10 minut</p></li>
-            <li><p>Přenos produktů včetně cen a dostupností</p></li>
-            <li><p>Automatická fakturace objednávek</p></li>
-            <li><p>Notifikace při změně stavu objednávky</p></li>
-          </ul>
-          <p class="module-text">👉 Řešení pro běžný provoz – odpadá ruční práce, data se udržují aktuální a objednávky se zpracují samy.</p>
-        </div>
-        <hr class="pc-div">
-        <div class="pc-group">
-          <h3 class="pc-module">Feedy</h3>
-          <p class="pc-price">2 490 Kč <span>/ měsíc</span></p>
-          <ul class="ticks">
-            <li><p>Vše co tarif LITE</p></li>
-            <li><p>Napojení až 5 feedů, včetně customizace</p></li>
-            <li><p>Automatická synchronizace každých 10 minut</p></li>
-            <li><p>Pravidla pro generování vydaných objednávek</p></li>
-            <li><p>Automatické odesílání objednávek</p></li>
-          </ul>
-          <p class="module-text">👉 Praktický balíček pro firmy, které pracují s více dodavateli a chtějí hlídat sklad i objednávky.</p>
-        </div>
-        <div class="pc-cta"><a href="#kontakt" class="btn" role="button"><span>Mám zájem</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></div>
-      </div>
-
-      <div class="price-card">
-        <div class="pc-tier">Feedco PROFI</div>
-        <p class="pc-sub">Plná kontrola a chytrá pravidla. Řešení, které se přizpůsobí vašemu byznysu a zvládne i větší objemy.</p>
-        <hr class="pc-div">
-        <div class="pc-group">
-          <h3 class="pc-module">E-shop</h3>
-          <p class="pc-price">4 490 Kč <span>/ měsíc</span></p>
-          <ul class="ticks">
-            <li><p>Vše co tarif BASIC</p></li>
-            <li><p>Propojení více e-shopů s Heliosem</p></li>
-            <li><p>Kompletní přenos produktů včetně parametrů</p></li>
-            <li><p>Alternativní a související produkty, varianty</p></li>
-            <li><p>Monitoring výpadků služby</p></li>
-            <li><p>Napojení na platební bránu</p></li>
-          </ul>
-          <p class="module-text">👉 Varianta pro e-shopy s vyšším objemem objednávek a potřebou kompletní správy produktů i plateb.</p>
-        </div>
-        <hr class="pc-div">
-        <div class="pc-group">
-          <h3 class="pc-module">Feedy</h3>
-          <p class="pc-price">4 490 Kč <span>/ měsíc</span></p>
-          <ul class="ticks">
-            <li><p>Vše co tarif BASIC</p></li>
-            <li><p>Napojení až 20 feedů, včetně customizace</p></li>
-            <li><p>Výběr dodavatele podle ceny a dostupnosti</p></li>
-            <li><p>Podpora více dodavatelů zboží</p></li>
-            <li><p>Automatické generování vydaných objednávek</p></li>
-            <li><p>Kompletní podpora obchodního procesu</p></li>
-          </ul>
-          <p class="module-text">👉 Řešení pro firmy, které chtějí mít pod kontrolou ceny, dostupnost i objednávky.</p>
-        </div>
-        <div class="pc-cta"><a href="#kontakt" class="btn" role="button"><span>Mám zájem</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a></div>
-      </div>
-
+  <div class="wrap stack">
+    <h2 class="section-title">Kolik vás bude Feedco stát</h2>
+    <p class="section-intro">Vyberte moduly, které potřebujete, a nastavte rozsah. Cena se počítá průběžně. Fakturujeme měsíčně, bez závazku. Za kombinaci modulů je sleva.</p>
+    <div class="calc-layout">
+      <div id="calc-moduly"></div>
+      <aside class="csum" id="calc-souhrn" aria-live="polite"></aside>
     </div>
   </div>
 </section>
-
 
 <!-- =========================== REFERENCE ============================ -->
 <section id="reference">
@@ -898,6 +883,238 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
     </div>
   </div>
 </footer>
+
+<!-- ==================== KALKULAČKA CENÍKU =========================== -->
+<script>
+(function () {
+  var PLUS = 990; // jednotný příplatek (další e-shop / +5 feedů / další API dodavatel)
+
+  var MODULES = [
+    {
+      id: 'eshop', name: 'E-shop konektor',
+      desc: 'Objednávky, stavy, ceny a produkty mezi Heliosem a e-shopem (Upgates, Shoptet).',
+      tiers: [
+        { id: 'start', name: 'Start', price: 1490, impl: 4900,
+          feats: ['objednávky do Heliosu 1× za hodinu', 'stavy objednávek zpět do e-shopu'] },
+        { id: 'standard', name: 'Standard', price: 2990, impl: 9900,
+          feats: ['synchronizace každých 10 minut', 'ceny a dostupnost na e-shop', 'základní produktová data', 'monitoring provozu'] },
+        { id: 'profi', name: 'Profi', price: 4990, impl: 14900, implFrom: true,
+          feats: ['kompletní produkty: parametry, obrázky, varianty', 'cenové úrovně a jazykové mutace', 'vlastní přenášená data'] }
+      ],
+      param: { key: 'eshops', label: 'Počet e-shopů', hint: 'první v ceně, další +990 Kč/měs', min: 1, max: 10,
+        extra: function (n) { return (n - 1) * PLUS; },
+        extraLabel: function (n) { return n > 1 ? (n - 1) + '× další e-shop' : null; } }
+    },
+    {
+      id: 'feedy', name: 'Feed konektor',
+      desc: 'Import dodavatelských XML/CSV feedů do Heliosu – ceny, dostupnost, produktová data.',
+      tiers: [
+        { id: 'start', name: 'Start', price: 990, impl: 4900,
+          feats: ['1 feed, synchronizace 1× denně', 'párování podle identifikátorů'] },
+        { id: 'standard', name: 'Standard', price: 2490, impl: 9900,
+          feats: ['až 5 feedů, sync dle potřeby', 'přepočty cen, filtrování', 'hlídání výpadku a změny struktury feedu'] },
+        { id: 'profi', name: 'Profi', price: 4490, impl: 14900, implFrom: true,
+          feats: ['až 10 feedů v ceně', 'výběr dodavatele podle ceny a dostupnosti', 'feedy přes API, custom pravidla'] }
+      ],
+      param: { key: 'feeds', label: 'Počet feedů', hint: 'nad rámec tarifu +990 Kč/měs za každých 5 feedů', min: 1, max: 60,
+        lockAt: { start: 1 },
+        extra: function (n, tier) { var inc = { start: 1, standard: 5, profi: 10 }[tier]; return Math.ceil(Math.max(0, n - inc) / 5) * PLUS; },
+        extraLabel: function (n, tier) { var inc = { start: 1, standard: 5, profi: 10 }[tier]; var p = Math.ceil(Math.max(0, n - inc) / 5); return p > 0 ? p + '× balíček +5 feedů' : null; } }
+    },
+    {
+      id: 'prijate', name: 'Přijaté objednávky',
+      desc: 'Automatické zpracování objednávek od zákazníků – fakturace, stavy, notifikace, platby.',
+      tiers: [
+        { id: 'start', name: 'Start', price: 1490, impl: 4900,
+          feats: ['automatické vystavení faktury', 'změny stavů a notifikace zákazníkům'] },
+        { id: 'standard', name: 'Standard', price: 2490, impl: 9900,
+          feats: ['faktura PDF e-mailem', 'párování plateb, platební brána'] },
+        { id: 'profi', name: 'Profi', price: 3990, impl: 14900, implFrom: true,
+          feats: ['vratky a storna', 'pokročilé párování plateb', 'více prodejních kanálů'] }
+      ],
+      param: null
+    },
+    {
+      id: 'vydane', name: 'Vydané objednávky',
+      desc: 'Automatické objednávání u dodavatelů podle zásob a přijatých objednávek.',
+      tiers: [
+        { id: 'start', name: 'Start', price: 1490, impl: 4900,
+          feats: ['objednávky dle skladového minima', 'odeslání dodavateli e-mailem'] },
+        { id: 'standard', name: 'Standard', price: 2490, impl: 9900,
+          feats: ['generování i dle přijatých objednávek', 'více dodavatelů, výběr dle ceny nebo dostupnosti'] },
+        { id: 'profi', name: 'Profi', price: 3990, impl: 14900, implFrom: true,
+          feats: ['napojení na API dodavatelů (1 v ceně)', 'custom nákupní pravidla'] }
+      ],
+      param: { key: 'apis', label: 'Dodavatelé přes API', hint: 'jen u tarifu Profi; první v ceně, další +990 Kč/měs', min: 1, max: 10,
+        onlyTier: 'profi',
+        extra: function (n) { return (n - 1) * PLUS; },
+        extraLabel: function (n) { return n > 1 ? (n - 1) + '× další API dodavatel' : null; } }
+    },
+    {
+      id: 'api', name: 'Feedco API',
+      desc: 'REST API nad Heliosem pro napojení jakéhokoliv e-shopu. Integraci proti API si dělá dodavatel vašeho e-shopu podle naší dokumentace.',
+      tiers: [
+        { id: 'flat', name: 'Měsíční fee', price: 1490, impl: 9900, implFrom: true,
+          feats: ['katalog, sklad a ceny z Heliosu', 'zakládání objednávek do Heliosu', 'žádné omezení e-shopové platformy', 'provoz a podpora API v ceně'] }
+      ],
+      param: null
+    }
+  ];
+
+  var state = {};
+  MODULES.forEach(function (m) {
+    state[m.id] = { on: false, tier: m.tiers.length === 1 ? m.tiers[0].id : 'standard', qty: m.param ? m.param.min : 1 };
+  });
+
+  function fmt(n) { return n.toLocaleString('cs-CZ') + ' Kč'; }
+  function tierOf(m) { return m.tiers.find(function (t) { return t.id === state[m.id].tier; }); }
+  function plural(n) { return n >= 5 ? 'modulů' : 'moduly'; }
+
+  function calc() {
+    var rows = [], subtotal = 0, impl = 0, implFrom = false;
+    MODULES.forEach(function (m) {
+      var s = state[m.id]; if (!s.on) return;
+      var t = tierOf(m);
+      var extra = 0, extraLabel = null;
+      if (m.param && (!m.param.onlyTier || m.param.onlyTier === s.tier)) {
+        extra = m.param.extra(s.qty, s.tier);
+        extraLabel = m.param.extraLabel(s.qty, s.tier);
+      }
+      subtotal += t.price + extra;
+      impl += t.impl;
+      if (t.implFrom) implFrom = true;
+      rows.push({ name: m.name, tier: t.name, single: m.tiers.length === 1, price: t.price, extra: extra, extraLabel: extraLabel });
+    });
+    var count = rows.length;
+    var discPct = count >= 3 ? 15 : count === 2 ? 10 : 0;
+    var disc = Math.round(subtotal * discPct / 100);
+    return { rows: rows, subtotal: subtotal, discPct: discPct, disc: disc, total: subtotal - disc, impl: impl, implFrom: implFrom, count: count };
+  }
+
+  function render() { renderModules(); renderSummary(); }
+
+  function renderModules() {
+    var wrap = document.getElementById('calc-moduly');
+    wrap.innerHTML = MODULES.map(function (m) {
+      var s = state[m.id];
+      var tiers = m.tiers.map(function (t) {
+        var sel = s.tier === t.id;
+        return '<div class="ctier' + (sel ? ' sel' : '') + '" data-mod="' + m.id + '" data-tier="' + t.id + '"' +
+          (m.tiers.length === 1 ? '' : ' role="button" tabindex="0" aria-pressed="' + sel + '"') + '>' +
+          '<div class="ct-name">' + t.name + '</div>' +
+          '<div class="ct-price">' + fmt(t.price) + ' <span>/ měs</span></div>' +
+          '<ul>' + t.feats.map(function (f) { return '<li>' + f + '</li>'; }).join('') + '</ul></div>';
+      }).join('');
+      var param = '';
+      if (m.param && (!m.param.onlyTier || m.param.onlyTier === s.tier)) {
+        var locked = m.param.lockAt && m.param.lockAt[s.tier] !== undefined;
+        param =
+          '<div class="cparam"><label>' + m.param.label +
+          '<span class="hint">' + (locked ? 'v tarifu Start je 1 feed; víc feedů řeší Standard' : m.param.hint) + '</span></label>' +
+          '<div class="stepper">' +
+          '<button type="button" aria-label="Ubrat" data-step="-1" data-mod="' + m.id + '"' + (locked ? ' disabled' : '') + '>−</button>' +
+          '<input type="number" value="' + s.qty + '" min="' + m.param.min + '" max="' + m.param.max + '" data-qty="' + m.id + '" aria-label="' + m.param.label + '"' + (locked ? ' disabled' : '') + '>' +
+          '<button type="button" aria-label="Přidat" data-step="1" data-mod="' + m.id + '"' + (locked ? ' disabled' : '') + '>+</button>' +
+          '</div></div>';
+      }
+      return '<div class="cmod' + (s.on ? ' on' : '') + '" id="cmod-' + m.id + '">' +
+        '<div class="cmod-head" data-toggle="' + m.id + '">' +
+        '<input type="checkbox"' + (s.on ? ' checked' : '') + ' data-check="' + m.id + '" aria-label="Zapnout modul ' + m.name + '">' +
+        '<div><h3 class="module-title">' + m.name + '</h3>' +
+        '<p class="module-text cmod-desc">' + m.desc + '</p></div></div>' +
+        '<div class="cmod-body"><div class="ctiers' + (m.tiers.length === 1 ? ' single' : '') + '">' + tiers + '</div>' + param + '</div></div>';
+    }).join('');
+  }
+
+  function renderSummary() {
+    var c = calc();
+    var box = document.getElementById('calc-souhrn');
+    if (c.count === 0) {
+      box.innerHTML = '<h3>Vaše sestava</h3>' +
+        '<p class="cs-empty">Zatím nemáte vybraný žádný modul. Zaškrtněte vlevo, co potřebujete – cena se objeví tady.</p>' +
+        '<p class="cs-note">Ceny jsou bez DPH. Fakturace měsíčně, bez závazku.</p>';
+      return;
+    }
+    var lines = c.rows.map(function (r) {
+      return '<div class="cs-line"><span class="l">' + r.name + (r.single ? '' : ' · ' + r.tier) +
+        (r.extraLabel ? '<span class="sub">' + r.extraLabel + ' (+' + fmt(r.extra) + ')</span>' : '') +
+        '</span><span class="r">' + fmt(r.price + r.extra) + '</span></div>';
+    }).join('');
+    var disc = c.discPct > 0 ?
+      '<div class="cs-line disc"><span class="l">Sleva za ' + c.count + ' ' + plural(c.count) + '</span>' +
+      '<span class="r">−' + c.discPct + ' % (−' + fmt(c.disc) + ')</span></div>' : '';
+    box.innerHTML = '<h3>Vaše sestava</h3>' + lines + disc +
+      '<div class="cs-total"><span class="label">Měsíčně</span><span class="val">' + fmt(c.total) + '<small> / měs</small></span></div>' +
+      '<div class="cs-impl"><span class="l">Nasazení (jednorázově)</span><span class="r">' + (c.implFrom ? 'od ' : '') + fmt(c.impl) + '</span></div>' +
+      '<p class="cs-note">Ceny jsou bez DPH. Fakturace měsíčně, bez závazku.' + (c.implFrom ? ' Kde je u nasazení „od", upřesníme cenu podle rozsahu.' : '') + '</p>' +
+      '<a class="btn" href="#kontakt" id="calc-cta" role="button"><span>Nezávazně poptat tuto sestavu</span><svg aria-hidden="true"><use href="#arrow-right"></use></svg></a>';
+  }
+
+  // CTA předvyplní sestavu do kontaktního formuláře a nechá anchor doscrollovat
+  function sestavaText() {
+    var c = calc();
+    return 'Mám zájem o Feedco v této sestavě:\n\n' +
+      c.rows.map(function (r) {
+        return '- ' + r.name + (r.single ? '' : ' (' + r.tier + ')') + (r.extraLabel ? ' + ' + r.extraLabel : '') + ': ' + fmt(r.price + r.extra) + '/měs';
+      }).join('\n') + '\n' +
+      (c.discPct > 0 ? 'Sleva za kombinaci: -' + c.discPct + ' %\n' : '') +
+      'Měsíčně celkem: ' + fmt(c.total) + ' bez DPH\n' +
+      'Nasazení jednorázově: ' + (c.implFrom ? 'od ' : '') + fmt(c.impl) + ' bez DPH';
+  }
+
+  document.addEventListener('click', function (e) {
+    var cta = e.target.closest && e.target.closest('#calc-cta');
+    if (cta) {
+      var msg = document.getElementById('kf-message');
+      if (msg) msg.value = sestavaText();
+      if (typeof gtag === 'function') gtag('event', 'kalkulacka_poptavka', { value: calc().total });
+      return; // anchor sám doscrolluje na #kontakt
+    }
+    var head = e.target.closest && e.target.closest('[data-toggle]');
+    if (head && !e.target.closest('.cmod-body')) {
+      var id = head.getAttribute('data-toggle');
+      state[id].on = !state[id].on;
+      render(); return;
+    }
+    var tier = e.target.closest && e.target.closest('[data-tier]');
+    if (tier) {
+      var tid = tier.getAttribute('data-mod');
+      state[tid].tier = tier.getAttribute('data-tier');
+      var m = MODULES.find(function (x) { return x.id === tid; });
+      if (m.param && m.param.lockAt && m.param.lockAt[state[tid].tier] !== undefined) state[tid].qty = m.param.lockAt[state[tid].tier];
+      render(); return;
+    }
+    var step = e.target.closest && e.target.closest('[data-step]');
+    if (step) {
+      var sid = step.getAttribute('data-mod');
+      var sm = MODULES.find(function (x) { return x.id === sid; });
+      var next = state[sid].qty + parseInt(step.getAttribute('data-step'), 10);
+      state[sid].qty = Math.min(sm.param.max, Math.max(sm.param.min, next));
+      render(); return;
+    }
+  });
+
+  document.addEventListener('input', function (e) {
+    var inp = e.target.closest && e.target.closest('[data-qty]');
+    if (inp) {
+      var id = inp.getAttribute('data-qty');
+      var m = MODULES.find(function (x) { return x.id === id; });
+      var v = parseInt(inp.value, 10);
+      if (!isNaN(v)) state[id].qty = Math.min(m.param.max, Math.max(m.param.min, v));
+      renderSummary(); // při psaní přepočítat jen souhrn, ať input neztratí fokus
+    }
+  });
+  document.addEventListener('change', function (e) {
+    if (e.target.closest && e.target.closest('[data-qty]')) render(); // po dopsání srovnat hodnotu s limity
+  });
+  document.addEventListener('keydown', function (e) {
+    var tier = e.target.closest && e.target.closest('[data-tier]');
+    if (tier && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); tier.click(); }
+  });
+
+  render();
+})();
+</script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK1160VT0P"></script>
 <script>

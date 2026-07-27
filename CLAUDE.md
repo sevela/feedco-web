@@ -87,13 +87,18 @@ navigačních odkazů přebije wordmark a ten se vykreslí velkými písmeny v D
 `ethel-web`) — mění se jen accent blok. Změnu **propiš do ostatních dvou** a do manuálu
 v `jakubsevela-web/brand/index.html`, který je jediná verze.
 
-## Ceny — pozor
+## Ceny — kalkulačka (od 27. 7. 2026)
 
-Ceny na současné stránce (LITE 490 / BASIC 2 490 / PROFI 4 490 Kč měsíčně) jsou z Carrdu
-a **neodpovídají** rozpracovanému cenovému modelu (4 moduly × tarify, sleva za kombinaci,
-implementační fee). Ten model má čtyři nevalidované domněnky a dokud nejsou uzavřené,
-**ceny na webu neměň a nové nepřidávej.** Cenová rozhodnutí patří do projektu Feedco,
-ne do brand projektu.
+Statické tarify z Carrdu (LITE 490 / BASIC 2 490 / PROFI 4 490) jsou **nahrazené
+interaktivní kalkulačkou** v sekci `#tarify` (v navigaci „Ceník"). Ceny nese modulární
+model: 5 modulů (E-shop konektor, Feed konektor, Přijaté objednávky, Vydané objednávky,
+Feedco API) × tarify Start/Standard/Profi, jednotný příplatek 990 Kč/měs (další e-shop /
++5 feedů / další API dodavatel), sleva za kombinaci (2 moduly −10 %, 3+ −15 %)
+a jednorázové nasazení (u Profi a Feedco API „od"). Data a přepočty žijí v `index.html`
+ve skriptu s `const MODULES` — kalkulačku dodal Jakub, ceny se mění jen tam.
+CTA souhrnu předvyplní sestavu do kontaktního formuláře (`#kf-message`) — lead jde
+přes `web-lead` do DB, žádné mailto. Cenová rozhodnutí dál patří do projektu Feedco;
+tady se řeší jen jejich podání.
 
 ## Texty
 
@@ -139,5 +144,6 @@ Disclaimer „není produktem Asseco Solutions" na produktovém webu zůstává.
   26. 7.); generátor og-image má `jakubsevela-web` v `scripts/generate-og.js`.
 - Fotky referencí (`image02`–`05.jpg`) se stahují z Carrdu ručně. Když fotka chybí,
   `onerror` ji nahradí iniciálami.
-- Kalkulačka (`feedco-kalkulacka-v2.html`) žije mimo repo a čeká na rozhodnutí,
-  jestli půjde na web veřejně, nebo zůstane interním nástrojem.
+- ~~Kalkulačka žije mimo repo a čeká na rozhodnutí.~~ **Vyřešeno 27. 7. 2026** —
+  kalkulačka je veřejně na webu v sekci `#tarify` a nahradila statické price-cards.
+  Komponenta price-card z manuálu zůstává pro ethel.cz.
