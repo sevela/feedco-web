@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Feedco – e-commerce konektor pro Helios Inuvio</title>
-<meta name="description" content="Propojte Helios se světem e-commerce. Feedco automatizuje přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery — objednávky, produkty, sklady i ceny.">
+<meta name="description" content="Propojte Helios se světem e-commerce. Feedco automatizuje přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery – objednávky, produkty, sklady i ceny.">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex, nofollow">
 <meta name="author" content="Jakub Ševela">
@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Feedco">
 <meta property="og:title" content="Feedco">
 <meta property="og:type" content="website">
-<meta property="og:description" content="Propojte Helios se světem e-commerce. Feedco automatizuje přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery — objednávky, produkty, sklady i ceny.">
+<meta property="og:description" content="Propojte Helios se světem e-commerce. Feedco automatizuje přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery – objednávky, produkty, sklady i ceny.">
 <meta property="og:url" content="https://feedco.cz/">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:image" content="https://feedco.cz/og-image.jpg">
@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="/brand/tokens.css">
 <style>
 /* ==========================================================================
-   feedco.cz — přestylováno podle grafického manuálu v1.1 (26. 7. 2026).
+   feedco.cz – přestylováno podle grafického manuálu v1.1 (26. 7. 2026).
    Barvy, typografie, komponenty a radiusy z /brand/tokens.css.
    Texty jsou shodné s předchozí replikou Carrdu; změnil se jen vizuál.
    ========================================================================== */
@@ -69,7 +69,7 @@ a { color: inherit; }
 }
 .wordmark-sm { font-size: 26px; }
 .wordmark-ft { font-size: 22px; }
-/* tečka: bold 700 + 125 % velikosti — univerzální pravidlo z manuálu */
+/* tečka: bold 700 + 125 % velikosti – univerzální pravidlo z manuálu */
 .wordmark-sm .dot, .wordmark-ft .dot {
   color: var(--accent); font-weight: 700; font-size: 1.25em; line-height: 1;
 }
@@ -108,7 +108,7 @@ a { color: inherit; }
 mark { background: transparent; color: var(--text); }
 em { font-style: italic; }
 
-/* odkazy v textu — light odstín + podtržení, hover zesílí */
+/* odkazy v textu – light odstín + podtržení, hover zesílí */
 .module-text a, .note a, .section-intro a, .faq-a a, .privacy-note a, .ft-legal a {
   color: var(--accent-l);
   text-decoration: underline;
@@ -158,7 +158,7 @@ em { font-style: italic; }
   display: flex; align-items: center; justify-content: center;
 }
 .hero-visual .hero-art { width: min(92%, 680px); height: auto; max-width: none; margin: 0; }
-/* fade jako u hero fotky na hubu — vizuál se rozpouští do pozadí vlevo a dole */
+/* fade jako u hero fotky na hubu – vizuál se rozpouští do pozadí vlevo a dole */
 .hero-visual::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
@@ -210,16 +210,16 @@ em { font-style: italic; }
 }
 .btn:hover { background: var(--accent-tint-hover); border-color: var(--accent-border-hover); }
 .btn svg { width: 0.9em; height: 0.9em; fill: currentColor; flex: 0 0 auto; }
-/* sekundární tlačítko — transparentní, jednotné napříč brandy (manuál 06) */
+/* sekundární tlačítko – transparentní, jednotné napříč brandy (manuál 06) */
 .btn.ghost { background: transparent; border-color: var(--border-2); color: var(--text); }
 .btn.ghost:hover { background: transparent; border-color: rgba(255, 255, 255, 0.25); }
 
 /* --- ceník: kalkulačka sestavy -------------------------------------------
-   Nahrazuje statické price-cards (Carrd ceny) — ceny teď nese modulární
+   Nahrazuje statické price-cards (Carrd ceny) – ceny teď nese modulární
    model: modul × tarif + rozsah, sleva za kombinaci, jednorázové nasazení.
    Stavba drží price-card komponentu manuálu v1.6: název tarifu v DM Mono
    uppercase, cena v Lora (čím větší, tím lehčí), výčet s mono plusem,
-   tónovaná CTA. Vybraný tarif nese accent border — žádné plné barevné
+   tónovaná CTA. Vybraný tarif nese accent border – žádné plné barevné
    plochy, žádná inverzní karta. */
 .calc-layout { display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start; }
 @media (max-width: 960px) { .calc-layout { grid-template-columns: 1fr; } }
@@ -335,7 +335,7 @@ em { font-style: italic; }
 }
 .ticks.lg li { font-size: 16.5px; }
 
-/* --- reference (komponenta z manuálu — shodná s jakubsevela.cz) ----------- */
+/* --- reference (komponenta z manuálu – shodná s jakubsevela.cz) ----------- */
 /* výchozí 3 sloupce; auto-fit sám ubere na 2, pak na 1 s klesající šířkou */
 .ref-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); margin-top: 20px; }
 .quote-card {
@@ -359,7 +359,7 @@ em { font-style: italic; }
   font-family: var(--font-mono); font-size: 1.1rem; color: var(--accent-l);
   background: var(--accent-tint); border: 1px solid var(--accent-border);
 }
-/* jméno / pozice / firma — vždy tři řádky, dlouhý text se zkrátí (…), ne zalomí */
+/* jméno / pozice / firma – vždy tři řádky, dlouhý text se zkrátí (…), ne zalomí */
 .quote-card .who-info { min-width: 0; }
 .quote-card .name, .quote-card .role, .quote-card .company {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -369,7 +369,7 @@ em { font-style: italic; }
 @media (max-width: 640px) { .quote-card { padding: 24px 22px; } }
 
 /* --- hero grafika: zdroje → Feedco → Helios ------------------------------
-   Inline SVG bez JS — barvy z tokenů, takže se přebarví se změnou palety.
+   Inline SVG bez JS – barvy z tokenů, takže se přebarví se změnou palety.
    Accent drží jen Feedco, tekoucí data a Helios (cílový systém);
    zdroje jsou neutrální, aby měl obrázek hierarchii. */
 .hero-art { width: 100%; height: auto; display: block; max-width: 460px; margin: 0 auto; }
@@ -378,7 +378,7 @@ em { font-style: italic; }
 .hero-art .nodebox { fill: var(--bg-alt); stroke: var(--border-2); stroke-width: 1; }
 .hero-art .nname   { font-family: var(--font-body); font-weight: 500; font-size: 16px; fill: var(--text-2); }
 .hero-art .wire    { fill: none; stroke: var(--border-2); stroke-width: 1.25; }
-.hero-art .packet  { fill: var(--accent); opacity: 0; }   /* zviditelní je až animace — bez ní by to byly zbloudilé tečky */
+.hero-art .packet  { fill: var(--accent); opacity: 0; }   /* zviditelní je až animace – bez ní by to byly zbloudilé tečky */
 .hero-art .coreC   { fill: url(#coreG); stroke: var(--accent-border); stroke-width: 1.5; }
 .hero-art .ring    { fill: none; stroke: var(--accent); opacity: 0.13; stroke-width: 1; }
 .hero-art .ring2   { fill: none; stroke: var(--border); stroke-width: 1; }
@@ -386,7 +386,7 @@ em { font-style: italic; }
 .hero-art .fdot    { fill: var(--accent); }
 .hero-art .glow    { fill: url(#glowG); }
 
-/* Helios není další zdroj, ale cílový systém — odlišen accentem */
+/* Helios není další zdroj, ale cílový systém – odlišen accentem */
 .hero-art .is-target .nodebox { stroke: var(--accent-border); }
 .hero-art .is-target .ico     { stroke: var(--accent-l); }
 .hero-art .is-target .nname   { fill: var(--accent-l); }
@@ -408,7 +408,7 @@ em { font-style: italic; }
   .hero-art .glow { animation: art-breathe 6.5s ease-in-out infinite; transform-origin: 260px 260px; }
 }
 /* Dráty jsou obousměrné: e-shop, API i Helios si s Feedcem vyměňují data
-   oběma směry. Každý směr má vlastní linku — dva pakety na jedné se cestou
+   oběma směry. Každý směr má vlastní linku – dva pakety na jedné se cestou
    srážely. Vnitřní linka vede dovnitř, vnější ven. Jediná výjimka je feed
    od dodavatele: ten se jen čte, Feedco do něj nic nezapisuje, takže má
    linku jednu. */
@@ -428,7 +428,7 @@ em { font-style: italic; }
 .contact-form { max-width: 560px; }
 .contact-form .field + .field { margin-top: 18px; }
 
-/* label: DM Mono uppercase — stejná role jako labely v kartách tarifů */
+/* label: DM Mono uppercase – stejná role jako labely v kartách tarifů */
 .contact-form label {
   display: block;
   font-family: var(--font-mono);
@@ -458,7 +458,7 @@ em { font-style: italic; }
   box-shadow: 0 0 0 3px var(--accent-tint);
 }
 
-/* honeypot — mimo viewport, ne display:none (to některé boty přeskočí) */
+/* honeypot – mimo viewport, ne display:none (to některé boty přeskočí) */
 .contact-form .hp { position: absolute; left: -9999px; }
 
 .contact-form .submit-row { margin-top: 26px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
@@ -509,7 +509,7 @@ em { font-style: italic; }
 .form-status.is-limit { border-color: var(--neutral-border); }
 .form-status.is-limit .fs-icon { background: var(--neutral-tint); color: var(--neutral-l); }
 
-/* --- Feedco API: pátý modul, jiná kategorie než konektory — proto karta --- */
+/* --- Feedco API: pátý modul, jiná kategorie než konektory – proto karta --- */
 .api-box {
   background: var(--card); border: 1px solid var(--border);
   border-radius: var(--radius-card); padding: 26px;
@@ -605,7 +605,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
 .ft-desc { display: block; margin-top: 2px; font-size: 14px; line-height: 1.5; color: var(--text-2); }
 
 .ft-col a.has-icon { display: flex; align-items: baseline; gap: 8px; }
-/* ikona je monochromatická — dědí barvu textu včetně hoveru */
+/* ikona je monochromatická – dědí barvu textu včetně hoveru */
 .ft-col .ico { width: 14px; height: 14px; fill: currentColor; flex: 0 0 auto; transform: translateY(2px); }
 .ft-col a.has-icon:hover .ico { color: var(--accent-l); }
 
@@ -783,12 +783,12 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
   </div>
 </section>
 
-<!-- ====================== CENÍK — KALKULAČKA ======================== -->
+<!-- ====================== CENÍK – KALKULAČKA ======================== -->
 <!-- Nahrazuje statické tarify z Carrdu (LITE/BASIC/PROFI). Ceny nese
      modulární model: modul × tarif + rozsah, sleva za kombinaci,
      jednorázové nasazení. Data a přepočty jsou ve skriptu na konci
      stránky (const MODULES). CTA předvyplní sestavu do kontaktního
-     formuláře — lead jde přes web-lead do DB, ne přes mailto. -->
+     formuláře – lead jde přes web-lead do DB, ne přes mailto. -->
 <section id="tarify">
   <div class="wrap stack">
     <h2 class="section-title">Kolik vás bude Feedco stát</h2>
@@ -935,7 +935,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
         <input type="email" id="kf-email" name="email" maxlength="128" placeholder="jan@firma.cz" required>
       </div>
       <div class="field">
-        <label for="kf-phone">Telefon <span class="opt">— nepovinné</span></label>
+        <label for="kf-phone">Telefon <span class="opt">– nepovinné</span></label>
         <input type="tel" id="kf-phone" name="phone" pattern="[0-9\-\(\)+ #*]+" minlength="7" maxlength="28" placeholder="+420 ...">
       </div>
       <div class="field hp" aria-hidden="true">
@@ -961,7 +961,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
 </section>
 
 <!-- ============================================================
-     SDÍLENÁ PATIČKA — shodná na jakubsevela.cz / ethel.cz / feedco.cz.
+     SDÍLENÁ PATIČKA – shodná na jakubsevela.cz / ethel.cz / feedco.cz.
      Mění se jen wordmark, věta pod ním, prolinky a disclaimer.
      Když tu něco měníš, propiš to do ostatních dvou rep.
      ============================================================ -->

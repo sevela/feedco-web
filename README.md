@@ -4,7 +4,7 @@ Modulární e-commerce konektor pro Helios Inuvio. Samostatný web (spoke) v arc
 hub-and-spoke; hub je [jakubsevela.cz](https://jakubsevela.cz).
 
 Statický web bez buildu. Nasazuje GitHub Pages z branch `main`, root.
-Web odchází z Carrdu — `index.html` je zatím replika původní stránky, redesign přijde potom.
+Web odchází z Carrdu – `index.html` je zatím replika původní stránky, redesign přijde potom.
 
 ## Struktura
 
@@ -12,14 +12,14 @@ Web odchází z Carrdu — `index.html` je zatím replika původní stránky, re
 index.html            web v brand systému (dark-first, limetkový akcent), texty z původní Carrd stránky
 images/               obrázky a loga
 brand/
-  tokens.css          barvy, typografie, radiusy — accent limetková; kopie z jakubsevela-web
+  tokens.css          barvy, typografie, radiusy – accent limetková; kopie z jakubsevela-web
 scripts/
   build-fonts.js      self-hosting Google Fonts do /fonts/
 CNAME                 feedco.cz
-.nojekyll             vypíná Jekyll — bez toho Pages ignoruje soubory s podtržítkem
+.nojekyll             vypíná Jekyll – bez toho Pages ignoruje soubory s podtržítkem
 robots.txt            zakazuje /brand/
 sitemap.xml
-CLAUDE.md             pravidla pro práci v repu — přečti dřív než začneš
+CLAUDE.md             pravidla pro práci v repu – přečti dřív než začneš
 ```
 
 ## Lokální náhled
