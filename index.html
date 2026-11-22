@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Feedco</title>
+<title>Feedco – e-commerce konektor pro Helios Inuvio</title>
 <meta name="description" content="Propojte Helios se světem e-commerce. Feedco automatizuje přenos dat mezi Heliosem, e-shopy a vašimi obchodními partnery – objednávky, produkty, sklady i ceny.">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="index, follow">
@@ -113,13 +113,13 @@ mark { background: transparent; color: var(--text); }
 em { font-style: italic; }
 
 /* odkazy v textu – light odstín + podtržení, hover zesílí */
-.module-text a, .note a {
+.module-text a, .note a, .section-intro a, .faq-a a, .privacy-note a, .ft-legal a {
   color: var(--accent-l);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
-.module-text a:hover, .note a:hover { text-decoration-thickness: 2px; }
+.module-text a:hover, .note a:hover, .section-intro a:hover, .faq-a a:hover, .privacy-note a:hover, .ft-legal a:hover { text-decoration-thickness: 2px; }
 
 /* --- navigace ------------------------------------------------------------ */
 .topnav {
@@ -513,6 +513,65 @@ em { font-style: italic; }
 .form-status.is-limit { border-color: var(--neutral-border); }
 .form-status.is-limit .fs-icon { background: var(--neutral-tint); color: var(--neutral-l); }
 
+/* --- Feedco API: pátý modul, jiná kategorie než konektory – proto karta --- */
+.api-box {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 26px;
+}
+.api-box .module-text { margin-top: 8px; max-width: 68ch; }
+
+/* --- nasazení: tři kroky --------------------------------------------------- */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+.step {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 26px;
+}
+.step-num {
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 500;
+  letter-spacing: 0.08em; color: var(--accent-l);
+}
+.step .module-title { margin-top: 10px; }
+.step .module-text { margin-top: 8px; }
+
+/* --- FAQ: details/summary bez JS ------------------------------------------ */
+.faq { max-width: 780px; }
+.faq details {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+.faq details + details { margin-top: 12px; }
+.faq summary {
+  list-style: none; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  padding: 18px 22px;
+  font-weight: 500; font-size: 16px; line-height: 1.5;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: '+';
+  font-family: var(--font-mono); font-size: 18px; line-height: 1;
+  color: var(--accent-l); flex: 0 0 auto;
+}
+.faq details[open] summary::after { content: '\2212'; } /* minus */
+.faq .faq-a { padding: 0 22px 20px; font-size: 15.5px; line-height: 1.7; color: var(--text-2); max-width: 68ch; }
+
+/* --- cookie lišta (vzor ethel /nahled, úložiště cookie místo localStorage) -- */
+.cookie-banner {
+  position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 40;
+  max-width: 560px; margin: 0 auto;
+  background: var(--card); border: 1px solid var(--border-2);
+  border-radius: var(--radius-card); padding: 20px 22px;
+  display: none; gap: 16px; flex-direction: column;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5);
+}
+.cookie-banner.show { display: flex; }
+.cookie-banner-text { font-size: 14px; line-height: 1.6; color: var(--text-2); }
+.cookie-banner-text strong { color: var(--text); font-weight: 500; }
+.cookie-banner-text a { color: var(--accent-l); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.cookie-banner-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.cookie-banner-actions .btn { padding: 8px 16px; font-size: 13.5px; }
+
 /* --- patička ------------------------------------------------------------- */
 /* --- sdílená patička -----------------------------------------------------
    Wordmark je ve vlastním pásu nad sloupci. Kdyby stál jako první prvek
@@ -660,7 +719,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
         <p class="section-title">s <span class="accent">Feedcem</span> to jde jinak...</p>
         <ul class="ticks lg">
           <li><p>Automatické toky dat mezi systémy</p></li>
-          <li><p>Validace a čištění dat před odesláním</p></li>
+          <li><p>Ceny a dostupnost na e-shopu vždy podle Heliosu</p></li>
           <li><p>Monitoring a notifikace při chybách</p></li>
           <li><p>Jedno místo pro nastavení a kontrolu</p></li>
         </ul>
@@ -672,33 +731,59 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
 <!-- ============================= FUNKCE ============================= -->
 <section id="funkce">
   <div class="wrap stack">
-    <h2 class="section-title">Co Feedco umí?</h2>
-    <p class="section-intro">Feedco pokrývá klíčové oblasti e-commerce provozu postaveného na Helios Inuvio. Každý z&nbsp;připravených modulů řeší konkrétní část datového a procesního toku mezi <mark>vašimi interními systémy, e-shopem a vašimi obchodními partnery</mark>. Služba je koncipována tak, aby mohla růst s vašimi aktuálními potřebami (obchodními, technickými) – od jednoduchého napojení jednoho e-shopu až po pokročilou vícezdrojovou automatizaci objednávek a dokladů.</p>
+    <h2 class="section-title">Co Feedco umí</h2>
+    <p class="section-intro">Pět modulů, které pokrývají tok dat mezi Heliosem, e-shopem a dodavateli. Každý řeší jednu část provozu a platí se zvlášť. Začnete tím, co vás pálí nejvíc, další moduly přidáte, až budou potřeba. Cenu si spočítáte v <a href="#tarify">kalkulačce níže</a>.</p>
 
     <div class="cols" style="margin-top:16px">
       <div class="stack">
         <h3 class="module-title">E-shop konektor</h3>
-        <p class="module-text">Tento modul slouží jako most mezi Heliosem a e-shopovou platformou klienta. Zajišťuje obousměrnou výměnu dat o objednávkách a expedici, čímž odstraňuje nutnost ručního přepisování údajů a snižuje chybovost. Nejčastěji napojujeme <a href="https://www.upgates.cz/">Upgates</a> a <a href="https://www.shoptet.cz/">Shoptet</a>. K dispozici máme také vlastní Feedco API.</p>
+        <p class="module-text">Objednávky z e-shopu padají rovnou do Heliosu a stavy expedice se vracejí zpátky. Ceny, dostupnost a produktová data se na e-shop synchronizují automaticky, podle tarifu až každých 10 minut. Napojujeme <a href="https://www.upgates.cz/">Upgates</a> a <a href="https://www.shoptet.cz/">Shoptet</a>, pro ostatní platformy je tu Feedco API.</p>
       </div>
       <div class="stack">
         <h3 class="module-title">Feed konektor</h3>
-        <p class="module-text">Feed konektor zajišťuje import produktových dat od externích dodavatelů&nbsp;– typicky ve formě XML nebo CSV feedů. Modul umí data načítat, upravit podle pravidel klienta a zanést do Heliosu. Je ideální pro firmy, které spravují velké množství produktů od různých dodavatelů.</p>
+        <p class="module-text">Ceníky a dostupnost od dodavatelů se načítají z XML nebo CSV feedů přímo do Heliosu. Feedco data přepočítá podle vašich pravidel, spáruje s vaším sortimentem a ohlídá, když dodavatel strukturu feedu změní nebo feed přestane chodit. Formát není překážka, napojíme jakýkoliv.</p>
       </div>
     </div>
 
     <div class="cols">
       <div class="stack">
-        <h3 class="module-title">Vydané objednávky</h3>
-        <p class="module-text">Modul určený pro firmy, které pravidelně objednávají zboží od dodavatelů a chtějí tento proces zcela automatizovat. Systém sleduje aktuální zásoby, nově přijaté objednávky a na základě definovaných pravidel generuje a odesílá nákupní objednávky.</p>
+        <h3 class="module-title">Přijaté objednávky</h3>
+        <p class="module-text">Objednávka od zákazníka projde Heliosem bez ručních kroků: vystaví se faktura, odejde e-mailem, spárují se platby a zákazník dostane zprávu o změně stavu. Vy řešíte jen výjimky.</p>
       </div>
       <div class="stack">
-        <h3 class="module-title">Přijaté objednávky</h3>
-        <p class="module-text">Tento modul zajišťuje zpracování objednávek přijatých od koncových zákazníků – ať už z e-shopu nebo jiných kanálů. Automatizace šetří čas při rutinních úkonech a zajišťuje konzistentní zpracování všech objednávek. Modul obsahuje také automatické vystavování a odesílání faktur.</p>
+        <h3 class="module-title">Vydané objednávky</h3>
+        <p class="module-text">Feedco sleduje zásoby a přijaté objednávky a podle vašich pravidel generuje objednávky dodavatelům. V Younger Optics tahle automatizace zkrátila týdenní práci s objednávkami ze čtyř hodin na půl hodiny.</p>
       </div>
     </div>
 
-    <p class="note"><em>Jednotlivé moduly jsou rozděleny do tarifů podle svých funkcí a lze je spolu <span class="accent">libovolně kombinovat</span>.</em></p>
-    <p class="note">👉 <em>Cenu si spočítáte v <a href="#tarify">kalkulačce níže</a> – vyberete moduly a rozsah, cena se počítá průběžně. Rádi vám připravíme <span class="accent">nabídku na míru přesně podle vašich potřeb</span>.</em></p>
+    <div class="api-box">
+      <h3 class="module-title">Feedco API</h3>
+      <p class="module-text">REST API nad Heliosem pro e-shopy mimo Upgates a Shoptet: katalog, sklad, ceny a zakládání objednávek. Integraci si podle <a href="https://docs.feedco.cz">dokumentace</a> udělá dodavatel vašeho e-shopu, provoz a podporu API držíme my.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ NASAZENÍ ============================ -->
+<section id="nasazeni">
+  <div class="wrap stack">
+    <h2 class="section-title">Jak probíhá nasazení</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3 class="module-title">Projdeme váš provoz</h3>
+        <p class="module-text">Na úvodním hovoru probereme, jaký máte e-shop a dodavatele, co dnes přepisujete ručně a které moduly to vyřeší. Cenu vidíte předem v kalkulačce, po hovoru ji jen potvrdíme.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3 class="module-title">Nasadíme Feedco k vašemu Heliosu</h3>
+        <p class="module-text">Feedco běží jako služba na vašem serveru vedle Heliosu. Data mezi Heliosem a e-shopem tečou napřímo, žádný cloud třetí strany mezi nimi není. Součástí nasazení je přizpůsobení na vaše číselníky, ceníky a pravidla.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3 class="module-title">Spustíme provoz</h3>
+        <p class="module-text">Synchronizace běží automaticky a Feedco hlídá výpadky i změny na straně e-shopu a dodavatelů. Platíte měsíčně, bez závazku. Když něco nesedí, řešíte to přímo s autorem řešení, ne s helpdeskem.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -796,6 +881,39 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
   </div>
 </section>
 
+<!-- ============================== FAQ =============================== -->
+<section id="faq">
+  <div class="wrap stack">
+    <h2 class="section-title">Časté otázky</h2>
+    <div class="faq">
+      <details>
+        <summary>Kde Feedco běží a kdo vidí naše data?</summary>
+        <div class="faq-a">Na vašem serveru, vedle Heliosu. Feedco komunikuje přímo s API vašeho e-shopu a s feedy dodavatelů, data neprocházejí přes žádný náš server.</div>
+      </details>
+      <details>
+        <summary>Co když máme e-shop na jiné platformě než Upgates nebo Shoptet?</summary>
+        <div class="faq-a">Pak je řešením Feedco API: váš dodavatel e-shopu se napojí podle naší dokumentace a na straně Heliosu se nic nemění. Tímhle způsobem běží například e-shop jednoho nakladatelství.</div>
+      </details>
+      <details>
+        <summary>Zasahuje Feedco do Heliosu?</summary>
+        <div class="faq-a">Feedco používá standardní rozšíření Heliosu (customizace), do jádra systému nezasahuje. Aktualizace Heliosu probíhají běžným postupem.</div>
+      </details>
+      <details>
+        <summary>Co potřebujeme připravit ze své strany?</summary>
+        <div class="faq-a">Windows server, na kterém Feedco poběží (může to být server s Heliosem), přístup k databázi Heliosu a přístupy k API e-shopu nebo k feedům dodavatelů. Instalaci a nastavení uděláme my.</div>
+      </details>
+      <details>
+        <summary>Co když dodavatel změní strukturu feedu?</summary>
+        <div class="faq-a">Feedco změnu detekuje a dá vám vědět dřív, než se do Heliosu dostanou špatná data. Úpravu na novou strukturu řešíme v rámci provozu.</div>
+      </details>
+      <details>
+        <summary>Můžeme kdykoliv skončit?</summary>
+        <div class="faq-a">Ano. Fakturujeme měsíčně a bez závazku, žádné výpovědní lhůty.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- ============================ KONTAKT ============================= -->
 <section id="kontakt">
   <div class="wrap stack">
@@ -850,7 +968,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
           Odeslat zprávu
           <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.7 8.8 13 8.8 8.9 12.9 10 14l6-6-6-6-1.1 1.1L13 7.2 1.7 7.2z"/></svg>
         </button>
-        <p class="privacy-note">Odpovídáme do dvou pracovních dnů.</p>
+        <p class="privacy-note">Odpovídáme do dvou pracovních dnů. Jak s údaji nakládáme, popisují <a href="/ochrana-osobnich-udaju.html">zásady ochrany osobních údajů</a>.</p>
       </div>
     </form>
 
@@ -894,7 +1012,7 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
 
     <div class="ft-legal">
       <p>Mgr. Jakub Ševela &middot; Lidická 700/19, 602 00 Brno &middot; IČ: 75185628 &middot; DIČ: CZ8503274703</p>
-      <p>Feedco není produkt společnosti Asseco Solutions.</p>
+      <p>Feedco není produkt společnosti Asseco Solutions. &middot; <a href="/ochrana-osobnich-udaju.html">Ochrana osobních údajů</a></p>
       <p class="ft-copy">&copy; 2025&ndash;2026 Feedco</p>
     </div>
   </div>
@@ -1132,12 +1250,63 @@ footer { padding: 56px 0 64px; border-top: 1px solid var(--border); background: 
 })();
 </script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK1160VT0P"></script>
+<!-- cookie lišta + GA4 jen po souhlasu. Úložiště volby je cookie
+     (localStorage je v tomhle repu zakázaný). Vzor: ethel-web /nahled. -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Souhlas s cookies">
+  <div class="cookie-banner-text">
+    <strong>Sušenky?</strong> Používáme jen analytické cookies (Google Analytics), abychom viděli, jak vám web slouží. Podrobnosti v <a href="/ochrana-osobnich-udaju.html">zásadách ochrany osobních údajů</a>.
+  </div>
+  <div class="cookie-banner-actions">
+    <button class="btn" id="cookie-accept" type="button">Přijmout</button>
+    <button class="btn ghost" id="cookie-reject" type="button">Odmítnout</button>
+  </div>
+</div>
+
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-ZK1160VT0P');
+/* ===== COOKIE CONSENT + GA4 ===== */
+(function () {
+  var GA_MEASUREMENT_ID = 'G-ZK1160VT0P';
+  var COOKIE = 'fc_consent';
+
+  var banner = document.getElementById('cookie-banner');
+  var acceptBtn = document.getElementById('cookie-accept');
+  var rejectBtn = document.getElementById('cookie-reject');
+
+  function getConsent() {
+    var m = document.cookie.match(/(?:^|; )fc_consent=([^;]*)/);
+    return m ? m[1] : null;
+  }
+  function setConsent(value) {
+    document.cookie = COOKIE + '=' + value + '; max-age=31536000; path=/; SameSite=Lax';
+  }
+  function hideBanner() { if (banner) banner.classList.remove('show'); }
+  function loadGA() {
+    if (window._feedcoGaLoaded) return;
+    window._feedcoGaLoaded = true;
+    var el = document.createElement('script');
+    el.async = true;
+    el.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_MEASUREMENT_ID);
+    document.head.appendChild(el);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+  }
+
+  var existing = getConsent();
+  if (existing === 'accepted') {
+    loadGA();
+  } else if (existing !== 'rejected' && banner) {
+    setTimeout(function () { banner.classList.add('show'); }, 1200);
+  }
+
+  if (acceptBtn) acceptBtn.addEventListener('click', function () {
+    setConsent('accepted'); hideBanner(); loadGA();
+  });
+  if (rejectBtn) rejectBtn.addEventListener('click', function () {
+    setConsent('rejected'); hideBanner();
+  });
+})();
 </script>
 
 <script>

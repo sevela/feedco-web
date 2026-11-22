@@ -14,11 +14,11 @@ s manuálem **v1.6** (26. 7. 2026): hero má jednotnou stavbu z hubu (chip label
 dvě CTA, ~84vh) a tarify jsou tři price-cards podle sekce 09 manuálu.
 Tokeny se berou z `/brand/tokens.css`, žádné hexy natvrdo.
 
-**Texty jsou z původní Carrd stránky** s dvěma výjimkami: wordmark `FEEDCO` → `feedco.`
-podle pravidla z manuálu a **hero text nový od Jakuba (26. 7. 2026)** – label „Integrace
-pro Helios Inuvio", H1 „Propojte Helios se světem e-commerce", nový perex; meta a og
-description s ním sjednocené. Obsahová revize zbytku stránky (strukura, argumentace,
-ceny) je samostatný krok, který ještě nenastal.
+**Obsahová revize je nasazená od 22. 11. 2026.** Hlavní stránka vznikla z náhledu `/nahled/`
+(27. 7. 2026): přepsané texty modulů, karta Feedco API, sekce „Jak probíhá nasazení“, FAQ,
+cookie lišta (GA4 až po souhlasu, volba v cookie `fc_consent`) a stránka
+`ochrana-osobnich-udaju.html`. Složka `/nahled/` už neexistuje. Hero text je od Jakuba
+(26. 7. 2026). Ceny v kalkulačce se revizí nezměnily.
 
 Pořadí dotahování webů je hub → feedco → ethel.
 
@@ -122,7 +122,6 @@ Disclaimer „není produktem Asseco Solutions" na produktovém webu zůstává.
   stránce (barva jako plocha), šachovnicový vzor v kartách, vlnkové oddělovače,
   pilulková tlačítka s 3px borderem.
 - Navigace je teď sticky (v Carrdu nebyla) – stejně jako na hubu.
-- Texty čekají na obsahovou revizi; zatím jsou to Carrd verze.
 - **Kontaktní formulář (vyřešeno 26. 7. 2026):** Carrd ho obsluhoval na svojí straně
   (AJAX na `/post/contact`), replika mezitím jela přes sdílený Formspree endpoint
   hubu (`xkgnqpnz`). Teď posílá `POST` na vlastní Supabase edge funkci `web-lead`
